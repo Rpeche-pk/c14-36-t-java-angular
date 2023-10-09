@@ -1,0 +1,9 @@
+$colGreenDark:#153230;
+$colGreenLight:#1DE290;
+$colWhite:#F9FCF8;
+$colBlack:#161719;
+$colGray:#6C757D;
+
+@function changeOpacity($color, $opacity){
+  @return rgba($color, $opacity);
+}
