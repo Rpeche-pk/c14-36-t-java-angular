@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//import { TarjetaComponent } from './tarjeta/tarjeta.component'; ESTE COMPONENTE A CUAL CORRESPONDE?
+import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './component/Pages/home/home.component';
@@ -24,6 +28,7 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     HomeComponent,
     CardComponent,
     SidebarComponent,
+    //TarjetaComponent, A CUAL COMPONENTE CORRESPONDE?
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
@@ -31,6 +36,7 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     CreditCardComponent,
     FooterComponent,
     HeaderComponent,
+    DashboardComponent
     HelpComponent,
     HelpResponseComponent,
     HelpRequestComponent
@@ -38,7 +44,11 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    AppRoutingModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
