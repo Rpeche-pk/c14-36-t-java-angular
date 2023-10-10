@@ -17,6 +17,8 @@ import { HelpResponseComponent } from './component/Pages/helpPages/help-response
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { RouterModule } from '@angular/router';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
+import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,12 +35,14 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     HeaderComponent,
     HelpComponent,
     HelpResponseComponent,
-    HelpRequestComponent
+    HelpRequestComponent,
+    HelpQuestionResComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
