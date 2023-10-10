@@ -1,4 +1,4 @@
-export const data = [
+export const DATA = [
   {
     id:1,
     question:"como pago un servicio",
@@ -27,6 +27,14 @@ export const data = [
   {
     id:6,
     question:"como recargar dinero",
-    response:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
+    response:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    steps:[
+      "paso 1",
+      "paso 2",
+      "paso 3",
+      "paso 4",
+      "paso 5",
+      "paso 6",
+    ]
   }
 ]

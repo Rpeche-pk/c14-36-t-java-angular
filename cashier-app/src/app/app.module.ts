@@ -21,6 +21,7 @@ import { HelpResponseComponent } from './component/Pages/helpPages/help-response
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 import { CreditCardChildComponent } from './component/Pages/credit-card/credit-card-child/credit-card-child.component';
+import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CreditCardChildComponent } from './component/Pages/credit-card/credit-c
     DashboardComponent,
     HelpComponent,
     HelpResponseComponent,
-    HelpRequestComponent
+    HelpRequestComponent,
+    HelpQuestionResComponent,
   ],
   imports: [
     BrowserModule,
