@@ -1,0 +1,44 @@
+// div.container {
+//     width: max-content;
+//     height: max-content;
+// }
+img{
+    align-items: center;
+    justify-content: center;
+}
+.izq {
+    background-color: #161719;
+    width: 700px;
+    height: max-content;
+
+    input {
+        border: #161719;
+        background-color: #161719;
+        /* Aquí usamos el mismo color de fondo de .izq */
+        color: aliceblue;
+    }
+}
+
+.der {
+    background-color: #1DE290;
+    width: 700px;
+    height: max;
+}
+
+.text-green-special {
+    color: #1DE290;
+}
+
+.btn-green {
+    background-color: #1DE290;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.btn-outline-green {
+
+    border-color: #1DE290;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
