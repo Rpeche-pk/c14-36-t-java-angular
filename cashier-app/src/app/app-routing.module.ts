@@ -15,14 +15,13 @@ const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login',component: LoginComponent },
   {path: 'register',component: RegisterComponent },
+  {path: 'dashboard', component:DashboardComponent},
   {path:'help', component:HelpComponent, children:[
     {path:'', redirectTo:'helpReq', pathMatch:'full'},
     {path:'helpReq', component:HelpRequestComponent},
     {path:'helpRes/:id', component:HelpResponseComponent},
     {path :'helpQuestionRes/:id', component:HelpQuestionResComponent}
-  ]},
-  {path: 'dashboard', component:DashboardComponent}
-
+  ]}
 ];
 
 @NgModule({

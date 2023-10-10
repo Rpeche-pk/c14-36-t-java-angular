@@ -28,7 +28,6 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
     HomeComponent,
     CardComponent,
     SidebarComponent,
-    //TarjetaComponent, A CUAL COMPONENTE CORRESPONDE?
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
