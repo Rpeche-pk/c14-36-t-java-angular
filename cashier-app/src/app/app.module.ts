@@ -20,6 +20,7 @@ import { MetricComponent } from './component/Pages/metric/metric.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
+import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     DashboardComponent,
     HelpComponent,
     HelpResponseComponent,
-    HelpRequestComponent
+    HelpRequestComponent,
+    HelpQuestionResComponent,
   ],
   imports: [
     BrowserModule,
