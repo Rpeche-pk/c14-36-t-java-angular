@@ -19,7 +19,6 @@ import { CreditCardComponent } from './component/Pages/credit-card/credit-card.c
 import { MetricComponent } from './component/Pages/metric/metric.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
-import { RouterModule } from '@angular/router';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 
 @NgModule({
@@ -28,7 +27,6 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     HomeComponent,
     CardComponent,
     SidebarComponent,
-    //TarjetaComponent, A CUAL COMPONENTE CORRESPONDE?
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
@@ -36,7 +34,7 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     CreditCardComponent,
     FooterComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
     HelpComponent,
     HelpResponseComponent,
     HelpRequestComponent
