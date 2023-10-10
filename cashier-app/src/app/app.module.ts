@@ -5,18 +5,22 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//import { TarjetaComponent } from './tarjeta/tarjeta.component'; ESTE COMPONENTE A CUAL CORRESPONDE?
+import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './component/Pages/home/home.component';
 import { CardComponent } from './shared/card/card.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-//import { TarjetaComponent } from './tarjeta/tarjeta.component'; ESTE COMPONENTE A CUAL CORRESPONDE?
 import { LoginComponent } from './component/Pages/login/login.component';
 import { RegisterComponent } from './component/Pages/register/register.component';
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
-import { MetricComponent } from './component/Pages/metric/metric.component';
 import { CreditCardComponent } from './component/Pages/credit-card/credit-card.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
+import { MetricComponent } from './component/Pages/metric/metric.component';
+import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
+import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
+import { RouterModule } from '@angular/router';
+import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,9 @@ import { DashboardComponent } from './component/Pages/dashboard/dashboard.compon
     FooterComponent,
     HeaderComponent,
     DashboardComponent
+    HelpComponent,
+    HelpResponseComponent,
+    HelpRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +48,7 @@ import { DashboardComponent } from './component/Pages/dashboard/dashboard.compon
     FormsModule,
     RouterModule,
     ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
