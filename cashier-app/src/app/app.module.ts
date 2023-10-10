@@ -20,6 +20,7 @@ import { MetricComponent } from './component/Pages/metric/metric.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
+import { CreditCardChildComponent } from './component/Pages/credit-card/credit-card-child/credit-card-child.component';
 import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
     TransactionComponent,
     MetricComponent,
     CreditCardComponent,
+    CreditCardChildComponent,
     FooterComponent,
     HeaderComponent,
     DashboardComponent,

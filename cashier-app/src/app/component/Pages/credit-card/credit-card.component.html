@@ -1,1 +1,61 @@
-<p>credit-card works!</p>
+
+<!-- Componente tarjeta, con boton datos tarjeta, el cual va a tener un offcanvas desde la derecha -->
+<body>
+
+    <div class="principal">
+       
+            <div class="data-component" *ngIf="enableData == false">
+                <app-credit-card-child></app-credit-card-child>
+            </div>
+        
+        <section class="vertical-card">
+
+            <div class="container">
+
+                <div class="img-container-top">
+                    <img id="chip" src="../../../../assets/credit-card/Screenshot 2023-10-07 132250.png" alt="">
+                </div>
+
+                <div class="img-container">
+                    <img id="logo" src="../../../../assets/credit-card/Screenshot 2023-10-07 121928.png" alt="">
+                    <img id="mastercard" src="../../../../assets/credit-card/Screenshot 2023-10-07 121932.png" alt="">
+                </div>
+
+            </div>
+
+        </section>
+        <section class="desc-card">
+            <div class="container-desc">
+                <h3 #titleCard>Tarjeta Virtual</h3>
+
+                <p>Terminada en 1943</p>
+                <!-- Este valor va a estar interpolado si es que generaremos un numero de tarje-->
+                <div class="btn">
+                    <button class="view-card" (click)="getData()">Ver datos de la tarjeta</button>
+                </div>
+
+            </div>
+            <div class="container-info">
+                <h3>Con tu tarjeta virtual podes:</h3>
+                <div class="list">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item" style="width: 50px; color: #677279;"><i
+                                class="fa-solid fa-cart-shopping fa-xl"></i></li>
+                        <li class="list-group-item">Hacer compras online</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item" style="width: 50px; color: #677279;"><i
+                                class="fa-solid fa-qrcode fa-xl" style="padding-left: 5px;"></i></li>
+                        <li class="list-group-item">Hacer compras online</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+</body>

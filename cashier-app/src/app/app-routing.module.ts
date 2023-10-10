@@ -9,12 +9,14 @@ import { RegisterComponent } from './component/Pages/register/register.component
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
+import { CreditCardComponent } from './component/Pages/credit-card/credit-card.component';
 import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login',component: LoginComponent },
   {path: 'register',component: RegisterComponent },
+  {path: 'credit-card', component: CreditCardComponent},
   {path: 'dashboard', component:DashboardComponent},
   {path:'help', component:HelpComponent, children:[
     {path:'', redirectTo:'helpReq', pathMatch:'full'},
