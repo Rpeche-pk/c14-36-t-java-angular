@@ -19,8 +19,8 @@ import { CreditCardComponent } from './component/Pages/credit-card/credit-card.c
 import { MetricComponent } from './component/Pages/metric/metric.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
-import { RouterModule } from '@angular/router';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
+import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +36,11 @@ import { HelpComponent } from './component/Pages/helpPages/help/help.component';
     CreditCardComponent,
     FooterComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
     HelpComponent,
     HelpResponseComponent,
-    HelpRequestComponent
+    HelpRequestComponent,
+    HelpQuestionResComponent,
   ],
   imports: [
     BrowserModule,
