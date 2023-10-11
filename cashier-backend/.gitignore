@@ -18,9 +18,9 @@ target/
 *.iws
 *.iml
 *.ipr
-./pom.xml
-./src/resources/aplication.properties
-./src/main/resources/static/key/
+pom.xml
+src/resources/aplication.properties
+src/main/resources/static/key/
 
 
 ### NetBeans ###
