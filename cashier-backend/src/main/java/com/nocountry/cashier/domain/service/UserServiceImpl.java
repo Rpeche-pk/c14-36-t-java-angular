@@ -14,7 +14,6 @@ import com.nocountry.cashier.persistance.repository.UserRepository;
 import com.nocountry.cashier.util.Utility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.control.MappingControl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -93,7 +90,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(String uuid) {
-        if(!StringUtils.hasText(uuid))throw new GenericException("El campo no puede estar vacío", HttpStatus.BAD_REQUEST);
+        if (!StringUtils.hasText(uuid))
+            throw new GenericException("El campo no puede estar vacío", HttpStatus.BAD_REQUEST);
         UserEntity userEntity = userRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("El usuario no se encuentra con id: ", uuid));
         userRepository.deleteById(userEntity.getId());
         return true;

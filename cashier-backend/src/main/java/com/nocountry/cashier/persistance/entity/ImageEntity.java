@@ -1,9 +1,7 @@
 package com.nocountry.cashier.persistance.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import static java.util.Objects.nonNull;
@@ -16,9 +14,11 @@ import static java.util.Objects.nonNull;
  */
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @Entity
 @Table(name = "image")
+@AllArgsConstructor
 public class ImageEntity {
     @Id
     @GeneratedValue(generator = "uuid")

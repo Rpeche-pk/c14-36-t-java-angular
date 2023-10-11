@@ -18,7 +18,6 @@ public interface ImageMapper {
 
     @Mapping(target = "id", ignore = true)
     ImageEntity toImageEntity(ImageResponseDTO imageResponseDTO);
-
     ImageResponseDTO toImageDto(ImageEntity image);
 
 }
