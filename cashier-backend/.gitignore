@@ -18,6 +18,10 @@ target/
 *.iws
 *.iml
 *.ipr
+./pom.xml
+./src/resources/aplication.properties
+./src/main/resources/static/key/
+
 
 ### NetBeans ###
 /nbproject/private/
