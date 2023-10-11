@@ -2,6 +2,7 @@ package com.nocountry.cashier.controller.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @JsonPropertyOrder({"name", "lastName", "image", "cvu", "createdDate"})
 @JsonRootName(value = "User")
 public record UserResponseDTO(
+        String id,
         LocalDateTime createdDate,
         String name,
         String lastName,

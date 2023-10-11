@@ -7,6 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,9 +46,14 @@ public final class Utility {
      */
     public static boolean validateEmail(String email) {
         email= StringUtils.trimAllWhitespace(email);
-        Pattern emailRegex = Pattern.compile("^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", Pattern.CASE_INSENSITIVE);
+        Pattern emailRegex = Pattern.compile("^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", Pattern.CASE_INSENSITIVE| Pattern.UNICODE_CASE);
         Matcher matcher = emailRegex.matcher(email);
         return matcher.find();
+    }
+
+    public static LocalDate stringToLocalDate(String birthDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return LocalDate.parse(birthDate.strip(),formatter);
     }
 
 }

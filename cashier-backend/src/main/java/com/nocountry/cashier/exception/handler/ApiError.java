@@ -1,4 +1,4 @@
-package com.nocountry.cashier.exception;
+package com.nocountry.cashier.exception.handler;
 
 import lombok.*;
 

@@ -1,6 +1,7 @@
 package com.nocountry.cashier.persistance.entity.listener.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.nocountry.cashier.persistance.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * @since 9/10/2023
  */
 
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class})
 @MappedSuperclass
 @JsonIgnoreProperties(value = {"createdDate", "lastModifiedDate"}, allowGetters = true)
 @Getter

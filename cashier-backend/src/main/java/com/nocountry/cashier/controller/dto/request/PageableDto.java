@@ -15,7 +15,6 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageableDto implements Pageable, Serializable {
@@ -27,52 +26,55 @@ public class PageableDto implements Pageable, Serializable {
     private String field;
 
     @Override
-    public boolean isPaged() {
-        return Pageable.super.isPaged();
-    }
-
-    @Override
     public int getPageNumber() {
-        return 0;
+        return page;
     }
 
     @Override
     public int getPageSize() {
-        return 0;
+        return size;
     }
 
     @Override
     public long getOffset() {
+        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public Sort getSort() {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Pageable next() {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Pageable previousOrFirst() {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Pageable first() {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Pageable withPage(int pageNumber) {
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public boolean hasPrevious() {
+        // TODO Auto-generated method stub
         return false;
     }
+
 }

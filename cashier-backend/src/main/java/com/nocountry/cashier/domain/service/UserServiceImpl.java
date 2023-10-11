@@ -5,47 +5,61 @@ import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
 import com.nocountry.cashier.controller.dto.response.UserResponseDTO;
 import com.nocountry.cashier.domain.usecase.UserService;
 import com.nocountry.cashier.exception.DuplicateEntityException;
+import com.nocountry.cashier.exception.GenericException;
+import com.nocountry.cashier.exception.InvalidEmailException;
+import com.nocountry.cashier.exception.ResourceNotFoundException;
 import com.nocountry.cashier.persistance.entity.UserEntity;
 import com.nocountry.cashier.persistance.mapper.UserMapper;
 import com.nocountry.cashier.persistance.repository.UserRepository;
 import com.nocountry.cashier.util.Utility;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.mapstruct.control.MappingControl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper mapper;
     private final Utility utility;
 
+
+    @Transactional
+    @Modifying
     @Override
     public UserResponseDTO create(UserRequestDTO data) {
         UserEntity userSave;
-        UserEntity filtro= userRepository.findByDni (data.dni().strip()).orElse(null);
-        UserEntity filtro2= userRepository.findByEmailIgnoreCase(data.email().strip()).orElse(null);
-        if (!Objects.isNull(filtro) || !Objects.isNull(filtro2)) throw new DuplicateEntityException("Oops el cliente ya existe");
+        UserEntity filtro2 = userRepository.findByEmailIgnoreCase(data.getEmail().strip()).orElse(null);
+        UserEntity filtro = userRepository.findByDni(data.getDni().strip()).orElse(null);
+        if (filtro2 != null || filtro != null) throw new DuplicateEntityException("Oops el cliente ya existe");
 
-        clienteSave = Optional.of(newCustomer)
-                .map(clienteMapper::toClienteEntity)
-                .map(clienteRepository::save)
-                .orElseThrow(() -> new GenericException("Oops ocurrió un error. Celular o email ya existe!!", HttpStatus.BAD_REQUEST));
+        userSave = Optional.of(data)
+                .map(mapper::toUserEntity)
+                .map(userRepository::save)
+                .orElseThrow(() -> new GenericException("Oops ocurrió un error. dni o email ya existe!!", HttpStatus.BAD_REQUEST));
 
-        ClienteResponseDto clienteResponseDto = clienteMapper.toClienteResponseDto(clienteSave);
-        Map<String, Object> response = Map.of("message", "Usuario creado con éxito!!", "cliente", clienteResponseDto);
-        return (ResponseEntity<ClienteResponseDto>) ResponseUtils.getResponseEntity(response,HttpStatus.CREATED);
+        return mapper.toUserResponseDto(userSave);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<UserResponseDTO> getAll(PageableDto pageableDto) {
         Pageable pageable = utility.setPageable(pageableDto);
         Page<UserEntity> products = userRepository.findAll(pageable);
@@ -58,17 +72,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserResponseDTO> getById(UUID uuid) {
+    public Optional<UserResponseDTO> getById(String uuid) {
+
         return Optional.empty();
     }
 
     @Override
-    public UserResponseDTO update(UUID uuid, UserRequestDTO data) {
-        return null;
+    @Transactional
+    @Modifying
+    public UserResponseDTO update(String uuid, UserRequestDTO data) {
+        Function<UserRequestDTO, Optional<UserEntity>> userId = userRequestDTO -> userRepository.findById(uuid);
+        Optional<UserEntity> userEntity = userId.apply(data);
+        if (userEntity.isEmpty())
+            throw new ResourceNotFoundException(String.format("El cliente a modificar con id %s, no se encuentra", uuid));
+
+        UserEntity modifyUser = userEntity.get().modifyUser(data);
+        UserEntity saveUser = userRepository.save(modifyUser);
+        return mapper.toUserResponseDto(saveUser);
     }
 
     @Override
-    public void delete(UUID uuid) {
+    public boolean delete(String uuid) {
+        if(!StringUtils.hasText(uuid))throw new GenericException("El campo no puede estar vacío", HttpStatus.BAD_REQUEST);
+        UserEntity userEntity = userRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("El usuario no se encuentra con id: ", uuid));
+        userRepository.deleteById(userEntity.getId());
+        return true;
+    }
 
+    @Override
+    @Transactional(readOnly = true)
+    public UserResponseDTO getClienteByEmail(String email) {
+        Predicate<String> verifyEmail = Utility::validateEmail;
+        if (!verifyEmail.test(email)) throw new InvalidEmailException("El correo ingresado debe ser tipo gmail");
+        UserEntity userEntity = userRepository.findByEmailIgnoreCase(email).orElseThrow(() -> new ResourceNotFoundException("Oops el Usuario no existe o ha sido borrado"));
+        if (!userEntity.getEnabled()) throw new ResourceNotFoundException("Oops el Usuario se encuentra desactivado.");
+        return mapper.toUserResponseDto(userEntity);
+    }
+
+    @Override
+    public UserResponseDTO getClienteByDni(String dni) {
+        return null;
     }
 }

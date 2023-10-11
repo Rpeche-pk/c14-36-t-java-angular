@@ -1,17 +1,20 @@
 package com.nocountry.cashier.persistance.entity;
 
+import com.google.common.base.Strings;
+import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
 import com.nocountry.cashier.persistance.entity.listener.audit.Auditable;
+import com.nocountry.cashier.util.Utility;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.validator.constraints.LuhnCheck;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "customer")
@@ -22,8 +25,9 @@ import java.util.UUID;
 @Setter
 public class UserEntity extends Auditable<LocalDateTime> {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(name = "name", nullable = false, length = 85)
     private String name;
@@ -33,24 +37,21 @@ public class UserEntity extends Auditable<LocalDateTime> {
 
     @Column(nullable = false, unique = true, length = 10)
     private String dni;
-    
 
     @Column(nullable = false, unique = true, length = 15)
     private String phone;
 
-    @Column(unique = true, length = 110)
+    @Column(name = "email", nullable = false, unique = true, length = 110)
     private String email;
 
     private String address;
 
     @Column(name = "birth_date")
-    @Temporal(value = TemporalType.DATE)
     private LocalDate birthDate;
 
     @Column(unique = true, length = 25)
     private String cvu;
 
-    @Temporal(value = TemporalType.DATE)
     private LocalDateTime openAccountDate;
 
     private Boolean enabled;
@@ -58,6 +59,23 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @OneToOne
     @JoinColumn(name = "url_profile")
     private ImageEntity image;
+
+    @PrePersist
+    public void onCreate() {
+        this.setEnabled(Boolean.TRUE);
+    }
+
+    public UserEntity modifyUser(UserRequestDTO requestDTO) {
+        if (StringUtils.hasText(requestDTO.getName())) this.setName(requestDTO.getName().strip());
+        if (StringUtils.hasText(requestDTO.getLastName())) this.setLastName(requestDTO.getLastName().strip());
+        if (StringUtils.hasText(requestDTO.getPhone())) this.setPhone(requestDTO.getPhone().strip());
+        if (StringUtils.hasText(requestDTO.getEmail())) this.setEmail(requestDTO.getEmail().strip());
+        if (StringUtils.hasText(requestDTO.getDni())) this.setDni(requestDTO.getDni().strip());
+        if (StringUtils.hasText(requestDTO.getAddress())) this.setAddress(requestDTO.getAddress().strip());
+        if (StringUtils.hasText(requestDTO.getBirthDate())) this.setBirthDate(Utility.stringToLocalDate(requestDTO.getBirthDate()));
+        return this;
+        //Preconditions.checkNotNull(modifyCustomer.getNombre(), "El objeto no puede ser nulo");
+    }
 
     /*@Column(name = "user_name", nullable = false, unique = true, length = 120)
     private String userName;
