@@ -9,7 +9,6 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * DTO for {@link UserEntity}
@@ -23,6 +22,8 @@ public class UserRequestDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    private String id;
+
     @Pattern(regexp = "^[a-zA-ZÑñ ]+$", message = "No se permite carácteres especiales y números.")
     @NotBlank(message = "Este campo no debe consistir solo en espacios en blanco")
     @NotEmpty(message = "Este campo no puede estar vacío. Ingrese su nombre")
@@ -31,7 +32,7 @@ public class UserRequestDTO implements Serializable {
     @Pattern(regexp = "^[a-zA-ZñÑ ]+$", message = "No se permite carácteres especiales y números.")
     @NotBlank(message = "no debe consistir solo en espacios en blanco")
     @NotEmpty(message = "no puede estar vacío. Ingrese sus apellidos")
-    private  String lastName;
+    private String lastName;
 
     @NotEmpty(message = "Debe ingresar un número de dni")
     private String dni;

@@ -2,14 +2,19 @@ package com.nocountry.cashier.domain.service;
 
 import com.nocountry.cashier.controller.dto.request.PageableDto;
 import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
+import com.nocountry.cashier.controller.dto.response.ImageResponseDTO;
 import com.nocountry.cashier.controller.dto.response.UserResponseDTO;
+import com.nocountry.cashier.domain.usecase.FirebaseService;
 import com.nocountry.cashier.domain.usecase.UserService;
 import com.nocountry.cashier.exception.DuplicateEntityException;
 import com.nocountry.cashier.exception.GenericException;
 import com.nocountry.cashier.exception.InvalidEmailException;
 import com.nocountry.cashier.exception.ResourceNotFoundException;
+import com.nocountry.cashier.persistance.entity.ImageEntity;
 import com.nocountry.cashier.persistance.entity.UserEntity;
+import com.nocountry.cashier.persistance.mapper.ImageMapper;
 import com.nocountry.cashier.persistance.mapper.UserMapper;
+import com.nocountry.cashier.persistance.repository.ImageRepository;
 import com.nocountry.cashier.persistance.repository.UserRepository;
 import com.nocountry.cashier.util.Utility;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +27,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +42,9 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper mapper;
     private final Utility utility;
+    private final FirebaseService firebaseService;
+    private final ImageRepository imageRepository;
+    private final ImageMapper imageMapper;
 
 
     @Transactional
@@ -111,4 +120,21 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO getClienteByDni(String dni) {
         return null;
     }
+
+    @Override
+    public UserResponseDTO addUserWithImage(String userRequestDTO, MultipartFile file) {
+        UserEntity userSave;
+        UserEntity userEntity = userRepository.findById(userRequestDTO.strip()).orElse(null);
+        if (userEntity == null)
+            throw new DuplicateEntityException("Oops el Usuario no existe, no se le puede asignar una imagen de perfil.");
+
+        ImageResponseDTO imageResponseDto = firebaseService.uploadImages(file);
+        ImageEntity image = imageMapper.toImageEntity(imageResponseDto);
+        userEntity.setImage(image);
+
+        userSave = userRepository.save(userEntity);
+        return mapper.toUserResponseDto(userSave);
+    }
+
+
 }

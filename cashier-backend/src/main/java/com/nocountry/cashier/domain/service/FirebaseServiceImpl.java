@@ -66,6 +66,7 @@ public class FirebaseServiceImpl implements FirebaseService {
                     .setStorageBucket(propertiesFirebase.getBucketName())
                     .build();
             FirebaseApp.initializeApp(options);
+            log.info("SE CARGO CORRECTAMENTE LAS CREDENCIALES");
         } catch (Exception ex) {
             log.warn("Ocurrio algo en leer las llaves de autenticacion {}", ex.getMessage());
             throw new ServiceAccountFirebase("Error al autenticarse" + ex.getMessage());

@@ -5,12 +5,12 @@ import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
 import com.nocountry.cashier.controller.dto.response.UserResponseDTO;
 import com.nocountry.cashier.domain.usecase.UserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -46,6 +46,13 @@ public class UserController {
         String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/")
                 .path("{id}").buildAndExpand(userResponse.id()).toUriString();
         return ResponseEntity.status(CREATED).body(uri);
+    }
+
+    @PostMapping(value = "/upload")
+    public ResponseEntity<Map<String, Object>> addUserWithProfile(@RequestPart("file") MultipartFile file,// * al usar @REQUESTPART NO SE PUEDE USAR @Valid
+                                                                  @RequestParam("uuid") String uuid) {
+        var userResponseDTO = userService.addUserWithImage(uuid, file);
+        return new ResponseEntity<>(Map.of("data", userResponseDTO), OK);
     }
 
     @DeleteMapping

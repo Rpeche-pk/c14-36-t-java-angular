@@ -56,7 +56,7 @@ public class UserEntity extends Auditable<LocalDateTime> {
 
     private Boolean enabled;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "url_profile")
     private ImageEntity image;
 
@@ -74,7 +74,6 @@ public class UserEntity extends Auditable<LocalDateTime> {
         if (StringUtils.hasText(requestDTO.getAddress())) this.setAddress(requestDTO.getAddress().strip());
         if (StringUtils.hasText(requestDTO.getBirthDate())) this.setBirthDate(Utility.stringToLocalDate(requestDTO.getBirthDate()));
         return this;
-        //Preconditions.checkNotNull(modifyCustomer.getNombre(), "El objeto no puede ser nulo");
     }
 
     /*@Column(name = "user_name", nullable = false, unique = true, length = 120)
