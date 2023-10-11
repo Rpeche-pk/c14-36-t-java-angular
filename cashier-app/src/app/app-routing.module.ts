@@ -8,16 +8,20 @@ import { RegisterComponent } from './component/Pages/register/register.component
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
+import { CreditCardComponent } from './component/Pages/credit-card/credit-card.component';
 import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'user', pathMatch: 'full' },
   {
     path: 'user',
     component: UserDashboardComponent,
     children: [
       { path: '', redirectTo: 'help', pathMatch: 'full' },
-      {path: 'home', component:HomeComponent},
+      { path: 'home', component: HomeComponent },
+      { path: 'credit-card', component: CreditCardComponent },
+      { path: 'dashboard', component: DashboardComponent },
       {
         path: 'help',
         component: HelpComponent,
@@ -31,7 +35,6 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
     ],
   },
-  { path: '', redirectTo: 'user', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
