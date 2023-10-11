@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class CreditCardComponent {
 
+  enableData: boolean = true;
+
+  getData(): void{
+    this.enableData = !this.enableData;
+   }
 }
