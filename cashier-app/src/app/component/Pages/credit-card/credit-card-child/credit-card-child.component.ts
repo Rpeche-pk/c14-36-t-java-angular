@@ -1,19 +1,16 @@
-import { BootstrapOptions, Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-credit-card-child',
   templateUrl: './credit-card-child.component.html',
   styleUrls: ['./credit-card-child.component.scss']
 })
-export class CreditCardChildComponent implements OnInit{
+export class CreditCardChildComponent {
+  @Output() emitShowStatus = new EventEmitter<boolean>();
+  @Input() show!:boolean;
 
-  window: boolean = true;
-
-  ngOnInit(): void {
-    this.window = true;
-  }
-  
   windowClose(){
-    this.window = !this.window;
+    console.log(this.show);
+    this.emitShowStatus.emit(false);
   }
 }

@@ -19,9 +19,8 @@ const routes: Routes = [
     component: UserDashboardComponent,
     children: [
       { path: '', redirectTo: 'help', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
+      { path: 'home', component: DashboardComponent },
       { path: 'credit-card', component: CreditCardComponent },
-      { path: 'dashboard', component: DashboardComponent },
       {
         path: 'help',
         component: HelpComponent,

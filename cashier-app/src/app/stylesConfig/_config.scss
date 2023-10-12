@@ -7,3 +7,7 @@ $colGray:#6C757D;
 @function changeOpacity($color, $opacity){
   @return rgba($color, $opacity);
 }
+@mixin changeColorPng ($color){
+  filter: drop-shadow(0 100px 0 $color);
+  transform: translateY(-100px);
+}

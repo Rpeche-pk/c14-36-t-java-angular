@@ -1,79 +1,62 @@
-.data-list {
-    display: block;
+@import "../../../../stylesConfig/config";
+:host{
+  position: absolute;
+  top: 0;
+  right: -150%;
+  height: 100%;
+  background-color: $colGreenDark;
+  transition: ease-in-out all 0.5s;
+  padding-inline: 1rem;
+}
+.cardDetailBox{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  &__card{
+    background-color: $colWhite;
+    border-radius: 1rem;
+    width: max(200px,100%);
+    &__magnet{
+      background-color: gray;
+      height: 50px;
+      margin-top: 30px;
+    }
+    &__info{
+      margin-top: 50px;
+      padding-inline: 1rem;
+    }
+  }
+  &__details{
+    display: flex;
+    flex-direction: column;
+    width: min(500px,100%);
+    &__field{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: solid gray 2px;
+      color: $colWhite;
+      padding-bottom: 0.5rem;
+    }
+    .copy{
+      overflow-y: hidden;
+      img{
+        @include changeColorPng($colGreenLight);
+        width: 2rem;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  &__close{
     position: absolute;
-    margin-left: 80%;
-    float: right;
-    margin-left: 80%;
-    transform: translateX(-50%);
-    z-index: 1;
-    animation-name: formMove;
-    animation-duration: .5s;
-}
-
-@keyframes formMove {
-    0% {
-        transform: translateX(50%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(-50%);
-        opacity: 1;
-    }
-    
-}
-.magnetic {
-    background-color: black;
-    transform: translateY(100%);
-    width: 300px;
-    height: 40px;
-    padding-left: 0;
-    margin-left: 0;
-
-}
-.container {
-    background-color: #FFFFFF;
-    width: 300px;
-    height: 200px;
-    border-radius: 15px;
-    position: relative;
-    justify-content: space-between;
-    padding: 0;
-    margin-bottom: 25px;
-}
-
-.username li{
-    font-weight: bold;
-    font-size: larger;
-    padding-left: 20px;
-    list-style: none;
-    transform: translateY(430%);
-}
-
-.card-number {
-    font-size: medium;
-    padding-left: 20px;
-    list-style: none;
-    transform: translateY(300%);
-}
-
-.list-data ul{
-    
-    margin-bottom: 5px;
-    border-bottom: black 2px solid;
-}
-
-.list-data ul li{
-    width: 200px;
-    background-color: #153230;
-    border: none;
-    color: #C0C9C6;
-    border-radius: 0;
-}
-
-.close-window {
-    position: relative;
-    float: right; 
-    background-color: #153230;
-    color: #1BB678; 
-    border: none; 
+    top: 1rem;
+    right: 1rem;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background-color: $colWhite;
+  }
 }
