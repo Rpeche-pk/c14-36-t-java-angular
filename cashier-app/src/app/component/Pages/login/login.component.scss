@@ -2,15 +2,20 @@
 //     width: max-content;
 //     height: max-content;
 // }
+:host{
+  display: block;
+  height: 90vh;
+}
 img{
     align-items: center;
     justify-content: center;
 }
 .izq {
     background-color: #161719;
-    width: 700px;
-    height: 550px;
-
+    // width: 700px;
+    // height: 550px;
+    flex-basis: 50%;
+    height: 100%;
     input {
         border: #161719;
         background-color: #161719;
@@ -21,8 +26,10 @@ img{
 
 .der {
     background-color: #1DE290;
-    width: 700px;
-    height: 550px;
+    // width: 700px;
+    flex-basis: 50%;
+    // height: 550px;
+    height: 100%;
 }
 
 .text-green-special {
