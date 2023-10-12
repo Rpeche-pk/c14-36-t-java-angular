@@ -11,6 +11,7 @@ import { HelpRequestComponent } from './component/Pages/helpPages/help-request/h
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
 import { CreditCardComponent } from './component/Pages/credit-card/credit-card.component';
 import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
+import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'register',component: RegisterComponent },
   {path: 'credit-card', component: CreditCardComponent},
   {path: 'dashboard', component:DashboardComponent},
+  {path: 'info-user', component:InfoUserComponent},
   {path:'help', component:HelpComponent, children:[
     {path:'', redirectTo:'helpReq', pathMatch:'full'},
     {path:'helpReq', component:HelpRequestComponent},
