@@ -22,6 +22,8 @@ import { HelpRequestComponent } from './component/Pages/helpPages/help-request/h
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 import { CreditCardChildComponent } from './component/Pages/credit-card/credit-card-child/credit-card-child.component';
 import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
+import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.component';
+import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
     HelpResponseComponent,
     HelpRequestComponent,
     HelpQuestionResComponent,
+    SideBarAltComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
