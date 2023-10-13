@@ -50,11 +50,9 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppRoutingModule,
     FormsModule,
     RouterModule,
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
