@@ -22,8 +22,7 @@
         img {
           width: 2rem;
           margin-right: 1rem;
-          filter: drop-shadow(0 100px 0 $colGreenLight);
-          transform: translateY(-100px);
+          @include changeColorPng($colGreenLight);
         }
       }
       &:hover {

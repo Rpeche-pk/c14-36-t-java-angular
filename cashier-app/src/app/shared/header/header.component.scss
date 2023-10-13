@@ -19,6 +19,19 @@
       place-items: center;
     }
   }
+  &__logout{
+    @include transitionFast;
+    border-radius: 0.5rem;
+    button{
+      color: $colWhite;
+    }
+    &:hover{
+      background-color: changeOpacity($colWhite, 0.5);
+    }
+    &:hover>button{
+      color: $colGreenDark;
+    }
+  }
 }
 @media screen and (max-width:470px) {
   .header__user__name{

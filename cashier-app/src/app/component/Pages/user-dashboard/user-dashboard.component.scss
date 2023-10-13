@@ -4,6 +4,7 @@
 
   app-side-bar-alt{
     width: 25%;
+    min-width: 25%;
     transition: all ease-in-out 0.5s;
   }
   .user-container{
@@ -12,7 +13,6 @@
     flex-direction: column;
     min-height: 100vh;
     .user-dashboard{
-      background-color: red;
       flex-grow: 2;
     }
   }
@@ -20,16 +20,19 @@
 @media screen and (max-width:768px) {
   app-side-bar-alt{
     width: 7% !important;
+    min-width: 7% !important;
   }
 }
 @media screen and (max-width:600px) {
   app-side-bar-alt{
     width: 10% !important;
+    min-width: 10% !important;
   }
 }
 @media screen and (max-width:450px) {
   app-side-bar-alt{
     width: 15% !important;
+    min-width: 10% !important;
   }
 }
 
