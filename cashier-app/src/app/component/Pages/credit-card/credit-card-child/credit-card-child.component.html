@@ -1,40 +1,30 @@
-<body>
-    <div class="container-list" *ngIf="window === true">
-        
-        <div class="data-list">
-            <button class="close-window" (click)="windowClose()"><i class="fa-solid fa-xmark fa-lg"></i></button>
-            <div class="container">
-                <div class="magnetic"></div>
-                <div class="username">
-                    <li>JUANITO ALIMAÑA</li>
-                </div>
-    
-                <div class="card-number">
-                    <li>1234 1234 1234 1234</li>
-                </div>
-            </div>
-            <div class="list-data">
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">Nro. de tarjeta</li>
-                    <li class="list-group-item">1234 1234 1234 1234</li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">Cod. de seguridad</li>
-                    <li class="list-group-item">123</li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">Fecha de vencimiento</li>
-                    <li class="list-group-item">31/12</li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">Nombre del titular</li>
-                    <li class="list-group-item">Juanito Alimaña</li>
-                </ul>
-            </div>
-            
-        </div>
-    
+<div class="cardDetailBox">
+  <div class="cardDetailBox__card">
+    <div class="cardDetailBox__card__magnet"></div>
+    <div class="cardDetailBox__card__info">
+      <p>1234 1234 1234 1234</p>
+      <p>JUANITO ALIMAÑA</p>
     </div>
-        
-</body>
-
+  </div>
+  <div class="cardDetailBox__details">
+    <div class="cardDetailBox__details__field">
+      <span>Nro de trajeta</span>
+      <div class="copy">
+        <span>1234 1234 1234 1234</span
+        ><img src="assets/copy.png" alt="copy_icon" />
+      </div>
+    </div>
+    <div class="cardDetailBox__details__field">
+      <span>Codigo de seguridad</span><span>123</span>
+    </div>
+    <div class="cardDetailBox__details__field">
+      <span>Fecha de vencimiento</span><span>12/31</span>
+    </div>
+    <div class="cardDetailBox__details__field">
+      <span>Nombre del titular</span><span>Juanito Alimaña</span>
+    </div>
+  </div>
+  <div class="cardDetailBox__close">
+    <button class="btn bg-transparent" (click)="windowClose()"><img src="assets/close.svg" alt=""></button>
+  </div>
+</div>
