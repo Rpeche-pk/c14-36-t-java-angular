@@ -47,6 +47,7 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
     InfoUserComponent,
     SideBarAltComponent,
     UserDashboardComponent,
+    HelpQuestionResComponent
   ],
   imports: [
     BrowserModule,
