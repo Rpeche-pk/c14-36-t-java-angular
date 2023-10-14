@@ -6,7 +6,7 @@ import com.google.common.base.Strings;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
-import com.nocountry.cashier.config.FirebaseProperties;
+import com.nocountry.cashier.configuration.FirebaseProperties;
 import com.nocountry.cashier.controller.dto.response.ImageResponseDTO;
 import com.nocountry.cashier.domain.usecase.FirebaseService;
 import com.nocountry.cashier.exception.GenericException;

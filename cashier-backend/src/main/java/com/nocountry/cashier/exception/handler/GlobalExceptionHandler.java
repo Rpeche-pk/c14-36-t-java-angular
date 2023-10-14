@@ -3,12 +3,15 @@ package com.nocountry.cashier.exception.handler;
 import com.nocountry.cashier.exception.DuplicateEntityException;
 import com.nocountry.cashier.exception.GenericException;
 import com.nocountry.cashier.exception.InvalidEmailException;
+import com.nocountry.cashier.exception.JwtGenericException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -84,6 +87,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(value = {JwtGenericException.class})
+    public ProblemDetail genericJWTException(JwtGenericException jwt, HttpServletRequest request) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+                jwt.getHttpStatus(), jwt.getLocalizedMessage()
+        );
+        problemDetail.setInstance(URI.create(request.getRequestURL().toString())); //getDescription(false).replace("uri=","")
+        problemDetail.setTitle(jwt.getHttpStatus().getReasonPhrase());
+        problemDetail.setProperty("date", LocalDateTime.now());
+        return problemDetail;
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponseMessage> handleConstraintViolationException(ConstraintViolationException constraintViolationException, WebRequest webRequest) {
@@ -102,6 +116,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiConstraintViolationException);
+    }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handlePSQLException(DataIntegrityViolationException ex) {
+        String message=ex.getMostSpecificCause().getMessage();
+        if (message.contains("Detail:")) message= message.substring(message.lastIndexOf("Detail")).replace("Detail:","");
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+                HttpStatus.BAD_REQUEST, message
+        );
+        problemDetail.setProperty("timestamp",LocalDateTime.now());
+        return problemDetail;
     }
 
 

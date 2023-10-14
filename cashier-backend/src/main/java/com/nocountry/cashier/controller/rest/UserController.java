@@ -2,9 +2,11 @@ package com.nocountry.cashier.controller.rest;
 
 import com.nocountry.cashier.controller.dto.request.PageableDto;
 import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
+import com.nocountry.cashier.controller.dto.response.GenericResponseDTO;
 import com.nocountry.cashier.controller.dto.response.UserResponseDTO;
 import com.nocountry.cashier.domain.usecase.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,7 +38,7 @@ public class UserController {
         pageableDto.setPage(page);
         pageableDto.setSize(size);
         List<UserResponseDTO> content = userService.getAll(pageableDto).getContent();
-        Map<String, Object> response = Map.of("message", "Usuario creado con éxito!!", "data", content);
+        Map<String, Object> response = Map.of("message", "Listado de Usuarios", "data", content);
         return new ResponseEntity<>(response, OK);
     }
 
@@ -49,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/upload")
-    public ResponseEntity<Map<String, Object>> addUserWithProfile(@RequestPart("file") MultipartFile file,// * al usar @REQUESTPART NO SE PUEDE USAR @Valid
+    public ResponseEntity<Map<String, Object>> addCustomerWithPhoto(@RequestPart("file") MultipartFile file,// * al usar @REQUESTPART NO SE PUEDE USAR @Valid
                                                                   @RequestParam("uuid") String uuid) {
         var userResponseDTO = userService.addUserWithImage(uuid, file);
         return new ResponseEntity<>(Map.of("data", userResponseDTO), OK);
@@ -60,5 +62,18 @@ public class UserController {
         userService.delete(uuid);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @PatchMapping("/{uuid}")
+    public ResponseEntity<?> updateCustomer(@Valid @RequestBody UserRequestDTO userRequestDTO,
+                                            @PathVariable @NotBlank(message = "No puede ser vacío") String uuid) {
+        UserResponseDTO update = userService.update(uuid, userRequestDTO);
+        return ResponseEntity.ok(new GenericResponseDTO<>(true,"actualizado correctamente",update));
+    }
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<?> getCustomerById(@PathVariable @NotBlank(message = "No puede ser vacío") String uuid){
+        return ResponseEntity.ok(new GenericResponseDTO<>(true,"Usuario Encontrado",userService.getById(uuid).get()));
+    }
+
 
 }
