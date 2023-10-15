@@ -12,13 +12,13 @@
 // }
 
 export interface User {
-    id: number;
+    id?: string;
+    name: string;
+    lastName: string;
     email: string;
-    password: string;
-    nombre: string;
-    apellido: string;
-    telefono: string;
-    direccion: string;
-    codigoPostal: string;
     dni: string;
-  }
+    phone: string;
+    password: string;
+    address: string;
+    birthDate: string;
+}

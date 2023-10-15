@@ -73,11 +73,11 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password2: ['', [Validators.required, Validators.minLength(8)]],
-      nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.minLength(7)]],
-      direccion: ['', [Validators.required]],
-      fechaNac: ['', [Validators.required, Validators.maxLength(4)]],
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.minLength(7)]],
+      address: ['', [Validators.required]],
+      birthDate: ['', [Validators.required, Validators.maxLength(4)]],
       dni: ['', [Validators.required, Validators.maxLength(8)]]
     });
   }
