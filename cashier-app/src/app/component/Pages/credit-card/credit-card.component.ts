@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./credit-card.component.scss']
 })
 export class CreditCardComponent {
+  childStatus = false;
 
+  showData(){
+    this.childStatus = true;
+  }
+  receiveChildStatus(newStatus:boolean){
+    console.log(newStatus);
+    this.childStatus =newStatus;
+  }
 }
