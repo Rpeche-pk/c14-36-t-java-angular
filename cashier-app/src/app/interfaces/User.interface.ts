@@ -1,12 +1,24 @@
+// export interface User {
+//     id?: any|undefined;
+//     nombre: string|undefined;
+//     apellido: string;
+//     dni: string;
+//     telefono: string;
+//     email: string;
+//     fechaNac: string;
+//     direccion: string;
+//     password: string;
+//     password2: string;
+// }
+
 export interface User {
-    id: string;
-    nombre: string;
-    apellido: string;
-    dni: string;
-    telefono: string;
+    id?: string;
+    name: string;
+    lastName: string;
     email: string;
-    fechaNac: Date;
-    direccion: string;
+    dni: string;
+    phone: string;
     password: string;
-    password2: string;
+    address: string;
+    birthDate: string;
 }
