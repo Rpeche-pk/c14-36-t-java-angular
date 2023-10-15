@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners({AuditingEntityListener.class})
 @MappedSuperclass
-@JsonIgnoreProperties(value = {"createdDate", "lastModifiedDate"}, allowGetters = true)
+//@JsonIgnoreProperties(value = {"createdDate", "lastModifiedDate"}, allowGetters = true)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,12 +27,12 @@ public abstract class Auditable<T>{
 
     @CreatedDate
     @Column(columnDefinition = "TIMESTAMP", name = "created_date")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    //@Temporal(value = TemporalType.TIMESTAMP)
     protected T createdDate;
 
     @LastModifiedDate
     @Column(name = "last_modified_date", columnDefinition = "TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    //@Temporal(value = TemporalType.TIMESTAMP)
     protected T lastModifiedDate;
 
 }

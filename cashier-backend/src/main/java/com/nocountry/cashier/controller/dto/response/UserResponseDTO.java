@@ -14,14 +14,13 @@ import java.time.LocalDateTime;
  * @license Lrpa, zephyr cygnus
  * @since 10/10/2023
  */
-@JsonPropertyOrder({"name", "lastName", "image", "cvu", "createdDate"})
-@JsonRootName(value = "User")
+@JsonPropertyOrder({"name", "lastName","createdDate","image"})
+@JsonRootName(value = "data")
 public record UserResponseDTO(
         String id,
         LocalDateTime createdDate,
         String name,
         String lastName,
-        String cvu,
         ImageResponseDTO image
 
 ) implements Serializable {

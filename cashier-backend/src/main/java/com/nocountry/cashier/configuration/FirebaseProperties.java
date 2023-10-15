@@ -1,4 +1,4 @@
-package com.nocountry.cashier.config;
+package com.nocountry.cashier.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
