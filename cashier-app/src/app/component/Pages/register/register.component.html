@@ -8,19 +8,32 @@
         <img src="assets/cashier1.png" alt="logo_icon" />
       </div>
       <!-- ------------------------------formulario de registro -------------->
-      <form class="loginBox__left__container__form">
+      <form 
+      [formGroup]="user"
+      (ngSubmit)="onSubmit()"
+      class="loginBox__left__container__form">
         <div class="loginBox__left__container__form__field">
-          <label for="names">Nombre</label>
+          <label for="nombre">Nombre</label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="text" id="names" placeholder="Nombre" />
+            <input 
+            type="text" 
+            id="nombre"
+            name="nombre"
+            formControlName="nombre" placeholder="Nombre" />
             <img src="assets/icon.png" alt="person_icon" />
           </div>
         </div>
+       
 
         <div class="loginBox__left__container__form__field">
-          <label for="apell">Apellido </label>
+          <label for="apellido">Apellido </label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="text" id="apell" placeholder="Apellido" />
+            <input 
+            type="text" 
+            formControlName="apellido"
+            name="apellido"
+            id="apellido" 
+            placeholder="Apellido" />
             <img src="assets/icon.png" alt="person_icon" />
           </div>
         </div>
@@ -28,47 +41,71 @@
         <div class="loginBox__left__container__form__field">
           <label for="dni">DNI </label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="text" id="dni" placeholder="12131214" />
+            <input type="text" formControlName="dni"
+            name="dni"
+            id="dni" 
+            placeholder="12131214" />
             <img src="assets/DNI.png" alt="id_icon" />
           </div>
         </div>
 
         <div class="loginBox__left__container__form__field">
-          <label for="phone">Tel&eacute;fono</label>
+          <label for="telefono">Tel&eacute;fono</label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="text" id="phone" placeholder="12-123 123 123 123" />
+            <input type="text" 
+            formControlName="telefono"
+            name="telefono"
+            id="telefono" 
+            placeholder="12-123 123 123 123" />
             <img src="assets/Phone.png" alt="phone_icon" />
           </div>
         </div>
 
         <div class="loginBox__left__container__form__field">
-          <label for="mail">Correo</label>
+          <label for="email">Correo</label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="email" id="mail" placeholder="ejemplo@gmail.com" />
+            <input type="email" 
+            id="email" 
+            formControlName="email"
+            name="email"
+            placeholder="ejemplo@gmail.com" />
             <img src="assets/email.png" alt="mail_icon" />
           </div>
         </div>
 
         <div class="loginBox__left__container__form__field">
-          <label for="dateBorn">Fecha de nacimiento</label>
+          <label for="fechaNac">Fecha de nacimiento</label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="date" id="dateBorn" />
+            <input 
+            type="date"
+            formControlName="fechaNac"
+            name="fechaNac" 
+            id="fechaNac" />
             <img src="assets/date.png" alt="date_icon" />
           </div>
         </div>
 
         <div class="loginBox__left__container__form__field">
-          <label for="address">Direcci&oacute;n </label>
+          <label for="direccion">Direcci&oacute;n </label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="text" id="address" placeholder="Av. Los perales #123" />
+            <input 
+            type="text" 
+            id="direccion" 
+            formControlName="direccion"
+            name="direccion" 
+            placeholder="Av. Los perales #123" />
             <img src="assets/address.png" alt="pinmap_icon" />
           </div>
         </div>
 
         <div class="loginBox__left__container__form__field">
-          <label for="pass">Contraseña </label>
+          <label for="password">Contraseña </label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="password" id="pass" placeholder="********" />
+            <input 
+            type="password" 
+            formControlName="password"
+            name="password" 
+            id="password" placeholder="********" />
             <img src="assets/llave.png" alt="key_icon" />
             <button>
               <img class="eye" src="assets/eyeClose.png" alt="eye_icon" />
@@ -77,9 +114,13 @@
         </div>
 
         <div class="loginBox__left__container__form__field">
-          <label for="repeatpass">Repetir contraseña </label>
+          <label for="password2">Repetir contraseña </label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="password" id="repeatpass" placeholder="********" />
+            <input 
+            type="password" 
+            formControlName="password2"
+            name="password2" 
+            id="password2" placeholder="********" />
             <img src="assets/llave.png" alt="key_icon" />
             <button>
               <img class="eye" src="assets/eyeClose.png" alt="eye_icon" />
