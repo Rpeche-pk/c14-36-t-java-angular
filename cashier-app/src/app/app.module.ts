@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { TarjetaComponent } from './tarjeta/tarjeta.component'; ESTE COMPONENTE A CUAL CORRESPONDE?
+import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -48,7 +48,7 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
     InfoUserComponent,
     SideBarAltComponent,
     UserDashboardComponent,
-    HelpQuestionResComponent
+    HelpQuestionResComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +56,7 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
     AppRoutingModule,
     FormsModule,
     RouterModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],
