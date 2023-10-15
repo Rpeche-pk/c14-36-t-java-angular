@@ -1,61 +1,28 @@
-
-<!-- Componente tarjeta, con boton datos tarjeta, el cual va a tener un offcanvas desde la derecha -->
-<body>
-
-    <div class="principal">
-       
-            <div class="data-component" *ngIf="enableData == false">
-                <app-credit-card-child></app-credit-card-child>
-            </div>
-        
-        <section class="vertical-card">
-
-            <div class="container">
-
-                <div class="img-container-top">
-                    <img id="chip" src="../../../../assets/credit-card/Screenshot 2023-10-07 132250.png" alt="">
-                </div>
-
-                <div class="img-container">
-                    <img id="logo" src="../../../../assets/credit-card/Screenshot 2023-10-07 121928.png" alt="">
-                    <img id="mastercard" src="../../../../assets/credit-card/Screenshot 2023-10-07 121932.png" alt="">
-                </div>
-
-            </div>
-
-        </section>
-        <section class="desc-card">
-            <div class="container-desc">
-                <h3 #titleCard>Tarjeta Virtual</h3>
-
-                <p>Terminada en 1943</p>
-                <!-- Este valor va a estar interpolado si es que generaremos un numero de tarje-->
-                <div class="btn">
-                    <button class="view-card" (click)="getData()">Ver datos de la tarjeta</button>
-                </div>
-
-            </div>
-            <div class="container-info">
-                <h3>Con tu tarjeta virtual podes:</h3>
-                <div class="list">
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item" style="width: 50px; color: #677279;"><i
-                                class="fa-solid fa-cart-shopping fa-xl"></i></li>
-                        <li class="list-group-item">Hacer compras online</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item" style="width: 50px; color: #677279;"><i
-                                class="fa-solid fa-qrcode fa-xl" style="padding-left: 5px;"></i></li>
-                        <li class="list-group-item">Hacer compras online</li>
-                    </ul>
-                </div>
-
-            </div>
-
-        </section>
-
+<div class="cardInfo">
+ <div class="cardInfo__boxLeft d-flex flex-column align-items-center">
+  <div class="cardInfo__boxLeft__creditCard">
+    <img src="assets/cardImg.png" alt="cardImg_icon">
+    <h3 class="cardInfo__boxLeft__creditCard__title">Tarjeta Virtual</h3>
+    <p class="cardInfo__boxLeft__creditCard__subtitle">Terminado en 1943</p>
+    <button (click)="showData()">Ver datos de la tarjeta</button>
+  </div>
+  <div class="cardInfo__boxLeft__info">
+    <h5>Con tu tarjeta virtual podes</h5>
+    <div class="cardInfo__boxLeft__info__promo">
+      <div class="imgContainer">
+        <img src="assets/car.png" alt="car_icon">
+      </div>
+      <span>Hacer compras online</span>
     </div>
-
-
-
-</body>
+    <div class="cardInfo__boxLeft__info__promo">
+      <div class="imgContainer">
+        <img src="assets/ticket.png" alt="ticket_icon">
+      </div>
+      <span>Transferir dinero</span>
+    </div>
+  </div>
+ </div>
+  <app-credit-card-child [show]="childStatus"
+  (emitShowStatus)="receiveChildStatus($event)"
+  [ngClass]="childStatus?'active':''"></app-credit-card-child>
+</div>
