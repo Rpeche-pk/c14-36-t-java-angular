@@ -2,33 +2,34 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/User.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private readonly API = 'user.json'
+  private readonly API = environment.api;
   private readonly http = inject(HttpClient);
 
   constructor() { }
 
-  addNewUser(user: User): Observable<User> {
-    return this.http.post<User>(this.API, user);
+  addNewUser(user: User): Observable<any> {
+    return this.http.post<any>(this.API, user)
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.API);
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(this.API);
   }
 
-  getUser(id: string): Observable<User> {
-    return this.http.get<User>(`${this.API}/${id}`);
+  getUser(id: number): Observable<any> {
+    return this.http.get<any>(`${this.API}/${id}`);
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.API}/${user.id}`, user)
+  updateUser(user: User): Observable<any> {
+    return this.http.put<any>(`${this.API}/${user.id}`, user)
   }
 
-  deleteUser(id: string): Observable<void> {
+  deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`)
   }
 }

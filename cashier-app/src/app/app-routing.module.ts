@@ -31,9 +31,9 @@ const routes: Routes = [
           { path: 'helpQuestionRes/:id', component: HelpQuestionResComponent },
         ],
       },
+      { path: 'info-user', component:InfoUserComponent },
     ],
   },
-  { path: 'info-user', component:InfoUserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
