@@ -17,12 +17,12 @@ export class HelpRequestComponent {
 
   toResponse(e:MouseEvent){
     const id = (e.target as HTMLAnchorElement).id;
-    this.router.navigate(['help/helpRes',id])
+    this.router.navigate(['user/help/helpRes',id])
   }
   onSubmit(e:Event){
     const {keyword} = this.searchForm.value;
 
     const keywordFormat = (keyword as string).trim().replace(/\s+/g, '_').toLocaleLowerCase();
-    this.router.navigate(["help/helpQuestionRes",keywordFormat])
+    this.router.navigate(["user/help/helpQuestionRes",keywordFormat])
   }
 }

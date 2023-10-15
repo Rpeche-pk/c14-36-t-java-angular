@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { TarjetaComponent } from './tarjeta/tarjeta.component'; ESTE COMPONENTE A CUAL CORRESPONDE?
+import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -22,6 +23,9 @@ import { HelpRequestComponent } from './component/Pages/helpPages/help-request/h
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
 import { CreditCardChildComponent } from './component/Pages/credit-card/credit-card-child/credit-card-child.component';
 import { HelpQuestionResComponent } from './component/Pages/helpPages/help-question-res/help-question-res.component';
+import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
+import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.component';
+import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -41,16 +45,19 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
     HelpComponent,
     HelpResponseComponent,
     HelpRequestComponent,
+    InfoUserComponent,
+    SideBarAltComponent,
+    UserDashboardComponent,
     HelpQuestionResComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     RouterModule,
+    HttpClientModule,
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

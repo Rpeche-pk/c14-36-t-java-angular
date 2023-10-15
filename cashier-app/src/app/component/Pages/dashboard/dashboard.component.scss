@@ -1,5 +1,10 @@
-.container{
-    background-color: #161719;
+@import "../../../stylesConfig/config";
+.container {
+    background-color: $colGreenDark;
+    background-image: url('/assets/wave1.png'), url('/assets/wave2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: bottom;
     color: white;
     font-size: 14px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -117,25 +122,17 @@
 
 
 .table-responsive{
-    
     font-size: 14px;
     margin-left: -20px;
     margin-right: -50px;
 }
 
-.table{
-    border: none;
-    
-}
-
 .table th::content{
-    background-color: #161719;
     font-weight: bolder;
     color: white;
 }
 
 .table td::content{
-    background-color: #161719;
     font-weight: bolder;
     color: white;
 }
@@ -147,7 +144,8 @@
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis; 
-    border: 1px solid #161719;
+    border: 1px solid $colGreenDark;
+    background-color: $colGreenDark ;
 }
 
 .card{
