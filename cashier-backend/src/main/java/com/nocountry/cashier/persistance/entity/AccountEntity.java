@@ -1,18 +1,23 @@
 package com.nocountry.cashier.persistance.entity;
 
+
+import jakarta.persistence.*;
+
 import com.nocountry.cashier.persistance.entity.listener.audit.Auditable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
@@ -24,11 +29,18 @@ public class AccountEntity extends Auditable<LocalDateTime> {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idAccount;
 
-    private BigDecimal accountCredit;
-    private BigDecimal accountDebit;
-    private BigDecimal accountTotal;
-    //? en la transaccion esta la descripcion
-    private Long cvu;
+    @Column(unique = true, length = 25)
+    private String cvu;
+
+    private LocalDate openAccountDate;
+
+    private LocalDate updateAccountDate;
+
+    private Double TotalAccount;
+
+
     private boolean status;
+
+
 
 }
