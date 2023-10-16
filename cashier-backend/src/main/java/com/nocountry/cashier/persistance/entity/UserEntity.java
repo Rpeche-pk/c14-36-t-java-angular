@@ -60,6 +60,8 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @JoinColumn(name = "url_profile")
     private ImageEntity image;
 
+
+
     @PrePersist
     public void onCreate() {
         this.setEnabled(Boolean.TRUE);

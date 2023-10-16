@@ -1,13 +1,11 @@
 package com.nocountry.cashier.persistance.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -18,11 +16,17 @@ public class AccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAccount;
 
-    //para modificar luis
-    private Long cvu;
+    @Column(unique = true, length = 25)
+    private String cvu;
 
-    private Date openAccountDate;
-    private Date updateAccountDate;
+    private LocalDate openAccountDate;
+
+    private LocalDate updateAccountDate;
+
+    private Double TotalAccount;
+
     private boolean status;
+
+
 
 }
