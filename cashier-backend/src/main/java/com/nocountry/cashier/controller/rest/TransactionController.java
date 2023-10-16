@@ -56,13 +56,13 @@ public class TransactionController {
         return ResponseEntity.status(CREATED).body(uri);
     }
 
-    @GetMapping("/serach")
+    @GetMapping("/search/{id}")
     public ResponseEntity<?> getTransactionById(@PathVariable String id){
         return ResponseEntity.ok(new GenericResponseDTO<>(true,"Transaccion Encontrada",transactionService.getById(id).get()));
     }
     @GetMapping("/search/state")
     public ResponseEntity<?> getTransactionsByState(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                @RequestParam(value = "size", defaultValue = "4") Integer size, PageableDto pageableDto,@PathVariable String state) {
+                                                @RequestParam(value = "size", defaultValue = "4") Integer size, PageableDto pageableDto,@RequestParam String state) {
         pageableDto.setPage(page);
         pageableDto.setSize(size);
         List<TransactionResponseDTO> content = Collections.singletonList(transactionService.getTrasactionByState(state));
