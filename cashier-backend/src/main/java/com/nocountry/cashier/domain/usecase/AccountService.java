@@ -10,7 +10,7 @@ public interface AccountService {
 
     List<AccountResponseDTO> getAllAccounts();
 
-    AccountEntity getAccount(Long idAccount);
+    AccountEntity getAccount(String idAccount);
 
     //AccountEntity createAccount(AccountEntity accountEntity);
 

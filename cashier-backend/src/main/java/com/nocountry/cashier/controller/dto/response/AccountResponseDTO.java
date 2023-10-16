@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 public class AccountResponseDTO {
 
-    private Long idAccount;
+    private String idAccount;
 
     private String cvu;
 

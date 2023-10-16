@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "customer")
-@SQLDelete(sql = "UPDATE customer SET enabled=FALSE where id=?")
-@Where(clause = "enabled=TRUE")
+@SQLDelete(sql = "UPDATE customer SET enabled=false where id=?")
+@Where(clause = "enabled=true")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -56,10 +56,13 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @JoinColumn(name = "url_profile")
     private ImageEntity image;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "id_token")
     private TokenEntity token;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "id_account")
+    private AccountEntity accountEntity;
 
    @PrePersist
    public void onCreate() {

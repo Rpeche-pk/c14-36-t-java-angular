@@ -6,10 +6,13 @@ import com.nocountry.cashier.persistance.entity.listener.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "transaction")
@@ -17,6 +20,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@SQLDelete(sql = "UPDATE transaction SET enabled=false where id=?")
+@Where(clause = "enabled=true")
 public class TransactionEntity extends Auditable<LocalDateTime> {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -31,7 +36,7 @@ public class TransactionEntity extends Auditable<LocalDateTime> {
     @Column(name="amount")
     private Long  amount;
     @Column(name = "origin")
-    private Long origin;
+    private Long origin; // String cvu
     @Column(name = "destination")
     private Long destination;
     //STATE WITH enums OR boolean?
@@ -40,6 +45,10 @@ public class TransactionEntity extends Auditable<LocalDateTime> {
     @Column(name = "state")
     private EnumsState state;
 
+    private Boolean enabled;
 
+    @ManyToOne
+    @JoinColumn(name = "id_account")
+    private AccountEntity accountEntity;
 
 }

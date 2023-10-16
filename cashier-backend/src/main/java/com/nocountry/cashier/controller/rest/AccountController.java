@@ -38,7 +38,7 @@ public class AccountController {
     }
 
     @GetMapping("/{idAccount}")
-    public ResponseEntity<AccountEntity> getAccount(@PathVariable long idAccount){
+    public ResponseEntity<AccountEntity> getAccount(@PathVariable String idAccount){
 
         AccountEntity account = accountService.getAccount(idAccount);
 
@@ -67,7 +67,7 @@ public class AccountController {
 
     @DeleteMapping("/{idAccount}")
     public ResponseEntity<Map<String, Boolean>>
-    deleteAccount(@PathVariable Long idAccount){
+    deleteAccount(@PathVariable String idAccount){
         AccountEntity account = accountService.getAccount(idAccount);
 
         if(account == null){

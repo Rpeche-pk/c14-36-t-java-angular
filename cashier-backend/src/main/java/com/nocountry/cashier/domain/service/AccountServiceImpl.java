@@ -8,9 +8,11 @@ import com.nocountry.cashier.persistance.entity.UserEntity;
 import com.nocountry.cashier.persistance.mapper.AccountMapper;
 import com.nocountry.cashier.persistance.repository.AccountRepository;
 import com.nocountry.cashier.persistance.repository.UserRepository;
+import com.nocountry.cashier.util.GeneratorCVU;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -35,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountEntity getAccount(Long idAccount) {
+    public AccountEntity getAccount(String idAccount) {
         AccountEntity account = accountRepository.findById(idAccount).orElse(null);
         return account;
     }
@@ -47,29 +49,18 @@ public class AccountServiceImpl implements AccountService {
 
         AccountEntity accountEntity = new AccountEntity();
 
-        accountEntity.setTotalAccount(0D);
+        accountEntity.setTotalAccount(BigDecimal.ZERO);
         accountEntity.setOpenAccountDate(LocalDate.now());
-        accountEntity.setCvu(generateCvu());
+        accountEntity.setCvu((GeneratorCVU.generate("452", 22)));
         accountEntity.setStatus(true);
 
-        accountRepository.save(accountEntity);
+        userEntity.setAccountEntity(accountEntity);
 
-        //guardar en relacion user
-        //userRepository.save(accountEntity);
+        userRepository.save(userEntity);
 
         return accountMapper.toGetAccountDTO(accountEntity);
     }
 
-    private String generateCvu() {
-        Random cvuRandom = new Random();
-        Long cvuGenerated = cvuRandom.nextLong(400555123, 999999999);
-        return cvuGenerated.toString();
-    }
-
-    /*@Override
-    public AccountEntity createAccount(AccountEntity accountEntity) {
-        return accountRepository.save(accountEntity);
-    }*/
 
 
     @Override
