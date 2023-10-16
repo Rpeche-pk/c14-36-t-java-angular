@@ -1,5 +1,6 @@
 package com.nocountry.cashier.controller.rest;
 
+import com.nocountry.cashier.controller.dto.response.AccountResponseDTO;
 import com.nocountry.cashier.domain.usecase.AccountService;
 import com.nocountry.cashier.exception.RegisterNotFound;
 
@@ -10,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static io.opencensus.trace.Status.OK;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("/api/account")
@@ -23,9 +28,9 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping
-    public List<AccountEntity> getAllAccount(){
+    public List<AccountResponseDTO> getAllAccount(){
 
-        List<AccountEntity> accountList= accountService.getAllAccounts();
+        List<AccountResponseDTO> accountList= accountService.getAllAccounts();
 
         accountList.forEach(application -> logger.info(accountList.toString()));
 
@@ -43,11 +48,21 @@ public class AccountController {
         return ResponseEntity.ok(account);
     }
 
-    @PostMapping
+   /* @PostMapping
     public AccountEntity createAccount(@RequestBody AccountEntity account){
         logger.info("Account to create: " +account);
         return accountService.createAccount(account);
 
+    }*/
+
+    @PostMapping
+    public AccountResponseDTO createAccount(@RequestParam("uuidUser") String uuidUser){
+
+        //var accountResponseDTO = accountService.createAccount(uuidUser);
+
+        //return new ResponseEntity<>(Map.of("exeq", accountResponseDTO), OK);
+
+        return accountService.createAccount(uuidUser);
     }
 
     @DeleteMapping("/{idAccount}")

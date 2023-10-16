@@ -39,7 +39,7 @@ public class UserRequestDTO implements Serializable {
 
     @NotEmpty(message = "Debe ingresar un número de dni")
     private String dni;
-    @Pattern(regexp = "^[0-9]{9}$", message = "El número de celular debe tener 9 dígitos")
+    @Pattern(regexp = "^[0-12]{12}$", message = "El número de celular debe tener 12 dígitos")
     @NotEmpty(message = "Debe ingresar un número de celular")
     private String phone;
 

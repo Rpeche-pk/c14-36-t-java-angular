@@ -56,14 +56,16 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @JoinColumn(name = "url_profile")
     private ImageEntity image;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "id_token")
     private TokenEntity token;
 
-//    @PrePersist
-//    public void onCreate() {
-//        this.setEnabled(Boolean.TRUE);
-//    }
+   @PrePersist
+   public void onCreate() {
+       this.setEnabled(Boolean.TRUE);
+  }
+
 
     public UserEntity modifyUser(UserRequestDTO requestDTO) {
         if (StringUtils.hasText(requestDTO.getName())) this.setName(requestDTO.getName().strip());
