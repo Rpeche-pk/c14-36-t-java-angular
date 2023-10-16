@@ -41,19 +41,21 @@ public final class Utility {
 
     /**
      * Validación de correo solo gmail
+     *
      * @param email String
      * @return boolean
      */
     public static boolean validateEmail(String email) {
-        email= StringUtils.trimAllWhitespace(email);
-        Pattern emailRegex = Pattern.compile("^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", Pattern.CASE_INSENSITIVE| Pattern.UNICODE_CASE);
+        email = StringUtils.trimAllWhitespace(email);
+        Pattern emailRegex = Pattern.compile("^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         Matcher matcher = emailRegex.matcher(email);
         return matcher.find();
     }
 
-    public static LocalDate stringToLocalDate(String birthDate){
+    public static LocalDate stringToLocalDate(String birthDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return LocalDate.parse(birthDate.strip(),formatter);
+        return LocalDate.parse(birthDate.strip(), formatter);
     }
+
 
 }

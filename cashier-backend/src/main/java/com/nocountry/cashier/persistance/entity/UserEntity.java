@@ -1,16 +1,13 @@
 package com.nocountry.cashier.persistance.entity;
 
-import com.google.common.base.Strings;
 import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
 import com.nocountry.cashier.persistance.entity.listener.audit.Auditable;
 import com.nocountry.cashier.util.Utility;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Table;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import lombok.*;
+import org.hibernate.annotations.*;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
@@ -18,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "customer")
-@SQLDelete(sql = "UPDATE customer SET enabled= FALSE where id=?")
+@SQLDelete(sql = "UPDATE customer SET enabled=FALSE where id=?")
 @Where(clause = "enabled=TRUE")
 @NoArgsConstructor
 @Getter
@@ -41,7 +38,7 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @Column(nullable = false, unique = true, length = 15)
     private String phone;
 
-    @Column(name = "email", nullable = false, unique = true, length = 110)
+    @Column(name = "email", nullable = false, unique = true, length = 110) //nullabe
     private String email;
 
     private String address;
@@ -49,23 +46,26 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(unique = true, length = 25)
-    private String cvu;
-
     private LocalDateTime openAccountDate;
 
     private Boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    private String password;
+
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "url_profile")
     private ImageEntity image;
 
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "id_token")
+    private TokenEntity token;
 
-    @PrePersist
-    public void onCreate() {
-        this.setEnabled(Boolean.TRUE);
-    }
+   @PrePersist
+   public void onCreate() {
+       this.setEnabled(Boolean.TRUE);
+  }
+
 
     public UserEntity modifyUser(UserRequestDTO requestDTO) {
         if (StringUtils.hasText(requestDTO.getName())) this.setName(requestDTO.getName().strip());
@@ -74,15 +74,11 @@ public class UserEntity extends Auditable<LocalDateTime> {
         if (StringUtils.hasText(requestDTO.getEmail())) this.setEmail(requestDTO.getEmail().strip());
         if (StringUtils.hasText(requestDTO.getDni())) this.setDni(requestDTO.getDni().strip());
         if (StringUtils.hasText(requestDTO.getAddress())) this.setAddress(requestDTO.getAddress().strip());
-        if (StringUtils.hasText(requestDTO.getBirthDate())) this.setBirthDate(Utility.stringToLocalDate(requestDTO.getBirthDate()));
+        if (StringUtils.hasText(requestDTO.getBirthDate()))
+            this.setBirthDate(Utility.stringToLocalDate(requestDTO.getBirthDate()));
         return this;
     }
 
-    /*@Column(name = "user_name", nullable = false, unique = true, length = 120)
-    private String userName;
-
-    @Column(nullable = false)
-    private String password;*/
-
-
 }
+
+

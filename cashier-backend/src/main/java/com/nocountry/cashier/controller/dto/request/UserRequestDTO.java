@@ -22,8 +22,6 @@ public class UserRequestDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String id;
-
     @Pattern(regexp = "^[a-zA-ZÑñ ]+$", message = "No se permite carácteres especiales y números.")
     @NotBlank(message = "Este campo no debe consistir solo en espacios en blanco")
     @NotEmpty(message = "Este campo no puede estar vacío. Ingrese su nombre")
@@ -34,16 +32,21 @@ public class UserRequestDTO implements Serializable {
     @NotEmpty(message = "no puede estar vacío. Ingrese sus apellidos")
     private String lastName;
 
+    @NotEmpty(message = "es requerido.")
+    @NotBlank(message = "no debe consistir solo en espacios en blanco")
+    @Pattern(regexp = "^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", message = "Debe ser un correo tipo gmail.")
+    private String email;
+
     @NotEmpty(message = "Debe ingresar un número de dni")
     private String dni;
     @Pattern(regexp = "^[0-12]{12}$", message = "El número de celular debe tener 12 dígitos")
     @NotEmpty(message = "Debe ingresar un número de celular")
     private String phone;
 
-    @NotEmpty(message = "es requerido.")
-    @NotBlank(message = "no debe consistir solo en espacios en blanco")
-    @Pattern(regexp = "^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", message = "Debe ser un correo tipo gmail.")
-    private String email;
+    @NotBlank(message = "Password is required")
+    @Pattern(regexp = "^([a-zA-Z0-9,ñ]){8,20}$",
+            message = "Password must contain at least 8 characters including letters, numbers, spaces and commas")
+    private String password;
 
     private String address;
 

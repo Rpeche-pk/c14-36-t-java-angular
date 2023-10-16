@@ -12,7 +12,7 @@ import java.io.Serial;
  * @since 10/10/2023
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException extends RuntimeException {
+public final class ResourceNotFoundException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 1L;
     private String resourceName;
@@ -20,7 +20,7 @@ public class ResourceNotFoundException extends RuntimeException {
     private Object fieldValue;
 
     public ResourceNotFoundException(String resourceName, String fieldName, Object fieldValue) {
-        super(String.format("%s ;nombre del atributo: %s - valor del atributo: '%s'", resourceName, fieldName, fieldValue));
+        super(String.format("%s ;fieldName: %s - fieldValue: '%s'", resourceName, fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;

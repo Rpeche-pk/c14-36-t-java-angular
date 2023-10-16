@@ -14,7 +14,6 @@ import com.nocountry.cashier.persistance.entity.ImageEntity;
 import com.nocountry.cashier.persistance.entity.UserEntity;
 import com.nocountry.cashier.persistance.mapper.ImageMapper;
 import com.nocountry.cashier.persistance.mapper.UserMapper;
-import com.nocountry.cashier.persistance.repository.ImageRepository;
 import com.nocountry.cashier.persistance.repository.UserRepository;
 import com.nocountry.cashier.util.Utility;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,6 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
     private final Utility utility;
     private final FirebaseService firebaseService;
-    private final ImageRepository imageRepository;
     private final ImageMapper imageMapper;
 
 
@@ -54,7 +52,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userSave;
         UserEntity filtro2 = userRepository.findByEmailIgnoreCase(data.getEmail().strip()).orElse(null);
         UserEntity filtro = userRepository.findByDni(data.getDni().strip()).orElse(null);
-        if (filtro2 != null || filtro != null) throw new DuplicateEntityException("Oops el cliente ya existe");
+        if (filtro2!=null|| filtro != null) throw new DuplicateEntityException("Oops el cliente ya existe");
 
         userSave = Optional.of(data)
                 .map(mapper::toUserEntity)
@@ -78,9 +76,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<UserResponseDTO> getById(String uuid) {
-
-        return Optional.empty();
+        Function<String, Optional<UserEntity>> function = userRepository::findById;
+        UserEntity userEntity = function.apply(uuid).orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado", "uuid", uuid));
+        return Optional.of(mapper.toUserResponseDto(userEntity));
     }
 
     @Override
@@ -122,9 +122,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO addUserWithImage(String userRequestDTO, MultipartFile file) {
+    @Transactional
+    public UserResponseDTO addUserWithImage(String uuid, MultipartFile file) {
         UserEntity userSave;
-        UserEntity userEntity = userRepository.findById(userRequestDTO.strip()).orElse(null);
+        UserEntity userEntity = userRepository.findById(uuid.strip()).orElse(null);
         if (userEntity == null)
             throw new DuplicateEntityException("Oops el Usuario no existe, no se le puede asignar una imagen de perfil.");
 
