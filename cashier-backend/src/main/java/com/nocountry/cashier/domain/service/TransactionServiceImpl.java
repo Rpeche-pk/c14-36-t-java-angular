@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +39,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionResponseDTO create(TransactionRequestDTO data){
 
-        TransactionEntity transactionSave;
+        TransactionEntity transactionSave = new TransactionEntity();
+
+        data.setDateEmit(LocalDateTime.now());
 
         transactionSave = Optional.of(data)
                 .map(mapper :: toTransactionEntity )

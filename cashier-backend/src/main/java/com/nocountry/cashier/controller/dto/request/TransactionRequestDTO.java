@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -19,7 +20,7 @@ public class TransactionRequestDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String dateEmit;
+    private LocalDateTime dateEmit;
     private String type;
     private String amount;
     private String origin;
