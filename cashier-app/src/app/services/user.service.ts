@@ -34,4 +34,8 @@ export class UserService {
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`)
   }
+  loginUser(user: User): Observable<void>{
+    return this.http.get<void>(this.API);
+
+  }
 }
