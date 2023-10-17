@@ -10,27 +10,32 @@ import { User } from '../interfaces/User.interface';
 })
 export class UserService {
   private readonly API = environment.api;
+  private readonly API2 = environment.api2;
   private readonly http = inject(HttpClient);
 
   constructor() { }
 
-  addNewUser(user: User): Observable<any> {
-    return this.http.post<any>(this.API, user)
+  addNewUser(user: User): Observable<User> {
+    return this.http.post<User>(this.API, user)
   }
 
-  getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.API);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.API2);
   }
 
-  getUser(id: number): Observable<any> {
-    return this.http.get<any>(`${this.API}/${id}`);
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${this.API}/${id}`);
   }
 
-  updateUser(user: User): Observable<any> {
-    return this.http.put<any>(`${this.API}/${user.id}`, user)
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.API}/${user.id}`, user)
   }
 
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`)
+  }
+  loginUser(user: User): Observable<void>{
+    return this.http.get<void>(this.API);
+
   }
 }

@@ -26,6 +26,7 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
 import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
 import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.component';
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -57,9 +58,11 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
     FormsModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    CookieService
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
