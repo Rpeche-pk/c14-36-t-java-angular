@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { DATA } from '../data';
 import { ActivatedRoute } from '@angular/router';
 import { IhelpResponse } from '../Ires';
+import { scaling } from 'src/app/animations/animation';
 
 @Component({
   selector: 'app-help-question-res',
   templateUrl: './help-question-res.component.html',
   styleUrls: ['./help-question-res.component.scss'],
+  animations:[scaling]
 })
 export class HelpQuestionResComponent {
   results!: IhelpResponse[];

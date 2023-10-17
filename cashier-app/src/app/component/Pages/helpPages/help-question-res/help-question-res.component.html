@@ -1,6 +1,6 @@
 <div class="responseBox m-auto text-white">
   <h3 class="text-center mb-4">Resultados</h3>
-  <ul *ngIf="results.length !== 0; else fallback" class="resultList list-unstyled">
+  <ul *ngIf="results.length !== 0; else fallback" class="resultList list-unstyled" [@scalingEffect]>
     <li class="resultList__item" *ngFor="let result of results; let i = index">
       <a
         class="text-decoration-none"
