@@ -20,5 +20,5 @@ export interface User {
     phone: string;
     password: string;
     address: string;
-    birthDate: string;
+    birthDate: Date;
 }
