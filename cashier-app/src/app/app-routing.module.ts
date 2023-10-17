@@ -15,6 +15,7 @@ import { InfoUserComponent } from './component/Pages/info-user/info-user.compone
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
 import { authGuard } from './guards/auth.guard';
 import { loginGuard } from './guards/login.guard';
+import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'credit-card', component: CreditCardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'transfer', component:TransactionComponent},
+      {path : 'promo', component:PromotionsComponent},
       {path: 'help', component: HelpComponent,
         children: [
           { path: '', redirectTo: 'helpReq', pathMatch: 'full' },

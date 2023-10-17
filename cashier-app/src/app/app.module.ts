@@ -27,6 +27,7 @@ import { InfoUserComponent } from './component/Pages/info-user/info-user.compone
 import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.component';
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { CookieService } from 'ngx-cookie-service';
+import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { CookieService } from 'ngx-cookie-service';
     SideBarAltComponent,
     UserDashboardComponent,
     HelpQuestionResComponent,
+    PromotionsComponent,
   ],
   imports: [
     BrowserModule,

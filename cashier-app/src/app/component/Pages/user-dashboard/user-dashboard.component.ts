@@ -9,7 +9,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent {
-  constructor (private tokenService : TokenService, private router:Router, private authTimer:AuthTimerService){}
+  constructor (private tokenService : TokenService, private router:Router){}
   sidebarStatus!:boolean;
   @ViewChild('sideBar', { read: ElementRef }) sideBar!: ElementRef;
 
