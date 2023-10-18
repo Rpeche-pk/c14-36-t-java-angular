@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-import static com.nocountry.cashier.util.Constant.API_VERSION;
-import static com.nocountry.cashier.util.Constant.RESOURCE_AUTH;
+import static com.nocountry.cashier.util.Constant.*;
 
 /**
  * @author ROMULO
@@ -28,19 +27,21 @@ import static com.nocountry.cashier.util.Constant.RESOURCE_AUTH;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = API_VERSION + RESOURCE_AUTH)
+@RequestMapping(value = API_VERSION )
 public class AuthController {
     private final AuthService authService;
-    @PostMapping("/")
+    @PostMapping(RESOURCE_REGISTER+"/")
     public ResponseEntity<?> registerCustomer(@Valid @RequestBody UserRequestDTO authRequestDTO) {
         AuthResponseDTO register = authService.register(authRequestDTO);
         return ResponseEntity.ok().body(Map.of("data",register));
     }
 
-    @GetMapping("/")
+    @GetMapping(RESOURCE_AUTH+"/")
     public ResponseEntity<?> authenticateCustomer(@Valid @RequestBody AuthRequestDTO authDto,HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        AuthResponseDTO authenticate = authService.authenticate(authDto, token);
+
+        //        String token = request.getHeader("Authorization");
+
+        AuthResponseDTO authenticate = authService.authenticate(authDto);
         return ResponseEntity.ok().body(authenticate);
     }
 }

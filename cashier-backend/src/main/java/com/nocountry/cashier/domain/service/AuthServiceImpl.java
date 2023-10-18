@@ -52,20 +52,20 @@ public class AuthServiceImpl implements AuthService {
         if (dni.isPresent()) throw new DuplicateEntityException(message);
 
         UserEntity auth = mapper.toUserEntity(userRequestDTO);
-        String token = jwtTokenProvider.generateToken(auth);
-        auth.setToken(TokenEntity.builder().tokenGenerated(token).build());
+//        String token = jwtTokenProvider.generateToken(auth);
+//        auth.setToken(TokenEntity.builder().tokenGenerated(token).build());
         auth.setEnabled(Boolean.TRUE);
 
         userRepository.save(auth);
         return AuthResponseDTO.builder()
                 .message("Se registró correctamente")
-                .token(token)
+//                .token(token)
                 .build();
     }
 
     @Override
     @Transactional
-    public AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO, String token) {
+    public AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO) {
 
         Optional<UserEntity> user = userRepository.findByEmailIgnoreCase(authRequestDTO.email().strip());
         if (user.isEmpty()) throw new GenericException("El usuario no existe.", HttpStatus.NOT_FOUND);
@@ -75,19 +75,20 @@ public class AuthServiceImpl implements AuthService {
 
         //? TOKEN QUE VIENE DEL HEADER
 
-        if (Objects.isNull(token) || !token.startsWith("Bearer ")) throw new JwtGenericException("Token Not found",HttpStatus.BAD_REQUEST);
-        String jwt=token.substring(7);
+//        if (Objects.isNull(token) || !token.startsWith("Bearer ")) throw new JwtGenericException("Token Not found",HttpStatus.BAD_REQUEST);
+//        String jwt=token.substring(7);
 
         //* comprueba que no venga vacío de la base de datos
         //if (Objects.isNull(tokenBD)) throw new JwtGenericException("Oops no puede ingresar", HttpStatus.BAD_REQUEST);
-        if (!jwtTokenProvider.verifyToken(jwt)) //tokenBD.getTokenGenerated()
-            throw new JwtGenericException("Oops Token Invalido", HttpStatus.BAD_REQUEST);
+
+//        if (!jwtTokenProvider.verifyToken(jwt)) //tokenBD.getTokenGenerated()
+//            throw new JwtGenericException("Oops Token Invalido", HttpStatus.BAD_REQUEST);
 
         return verify ? AuthResponseDTO.builder()
                 .message("Authenticación correcta")
                 .token(jwtTokenProvider.generateToken(user.get()))
                 .build() : AuthResponseDTO.builder()
-                .token("N/A")
+//                .token("N/A")
                 .message("Password o email incorrectos").build();
     }
 }
