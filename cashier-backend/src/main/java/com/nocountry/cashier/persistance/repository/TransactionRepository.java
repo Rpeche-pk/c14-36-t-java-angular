@@ -8,22 +8,24 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionEntity,String> {
-    //@Query(("SELECT t from TransactionEntity t where t.dateEmit = :date"))
-    //Optional<TransactionEntity> findByDate(@Param(value="dateEmit") Date date);
-//    @Meta(comment = "Obtener todos los productos de una categoría específica")
-//    @Query("SELECT t from TransactionEntity t where upper(t.type) = upper(:type)")
-//    Optional<TransactionEntity> findByTypeTrans(@Param(value = "type") String type);
-//    @Query("SELECT t from TransactionEntity t where upper(t.status) = upper(:status)")
-//    Optional<TransactionEntity> findByStatusTrans(@Param(value = "status") String status);
-//    @Query("SELECT t from TransactionEntity t where t.amount = :amount")
-//    Optional<TransactionEntity> findByAmountTransactionEntity(@Param(value="amount") Long amount);
-//
-//    @Override
-//    Optional<TransactionEntity> findById(String s);
 
-    //Optional<TransactionEntity> findByTransactionByAmount(Long amount);
+  //List<TransactionEntity> findByStateIs(String state);
+  //List<TransactionEntity> findByStateEquals(String state);
+  //List<TransactionEntity> findByTypeIs(String state);
+  //List<TransactionEntity> findByAmountLessThanEqual(String state);
+//    @Query(value = "SELECT t FROM TransactionEntity t WHERE  t.state = :state")
+//    List<TransactionEntity> findByStateContaining(@Param("state") String state);
+
+//  @Query(value = "SELECT t FROM TransactionEntity t WHERE t.state LIKE %:state%")
+//  List<TransactionEntity> findByStateContaining(@Param("state") String state);
+
+  List<TransactionEntity> findByStateContaining(String state);
+
+
+
 }

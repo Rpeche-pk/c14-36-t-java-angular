@@ -1,30 +1,39 @@
 package com.nocountry.cashier.controller.dto.request;
 
-import com.nocountry.cashier.enums.EnumsState;
-import com.nocountry.cashier.enums.EnumsTransactions;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.*;
+
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.math.BigDecimal;
 
-@Data
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Builder
 public class TransactionRequestDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private LocalDateTime dateEmit;
+    private String dateEmit;
+    @NotEmpty(message = "Debe Ingresar El Tipo De Transaccion")
+    @NotBlank(message = "no debe consistir solo en espacios en blanco")
     private String type;
-    private String amount;
-    private String origin;
-    @NotEmpty(message = "Debe ingresar el destino")
+    @NotEmpty(message = "Debe Ingresar El Monto De La Transaccion")
+    @NotBlank(message = "no debe consistir solo en espacios en blanco")
+    private BigDecimal amount;
+    @NotEmpty(message = "Debe Ingresar El Origen De La Transaccion")
+    @NotBlank(message = "no debe consistir solo en espacios en blanco")
+    private Integer origin;
+    @NotEmpty(message = "Debe Ingresar El Destino De La Transaccion")
+    @NotBlank(message = "no debe consistir solo en espacios en blanco")
     private String destination;
     private String state;
 

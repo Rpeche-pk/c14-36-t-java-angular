@@ -4,14 +4,17 @@ import com.nocountry.cashier.controller.dto.request.PageableDto;
 import com.nocountry.cashier.controller.dto.request.TransactionRequestDTO;
 import com.nocountry.cashier.controller.dto.response.TransactionResponseDTO;
 import com.nocountry.cashier.domain.usecase.TransactionService;
+import com.nocountry.cashier.enums.EnumsState;
 import com.nocountry.cashier.exception.GenericException;
 import com.nocountry.cashier.exception.ResourceNotFoundException;
 import com.nocountry.cashier.persistance.entity.TransactionEntity;
 import com.nocountry.cashier.persistance.mapper.TransactionMapper;
+import com.nocountry.cashier.persistance.repository.AccountRepository;
 import com.nocountry.cashier.persistance.repository.TransactionRepository;
 import com.nocountry.cashier.util.Utility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -34,14 +37,33 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final TransactionMapper mapper;
     private final Utility utility;
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TransactionEntity> findByState(String state) throws Exception{
+        try {
+
+            List<TransactionEntity> listEntity = transactionRepository.findByStateContaining(state);
+
+            return listEntity;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+    }
 
     @Transactional
     @Override
     public TransactionResponseDTO create(TransactionRequestDTO data){
 
         TransactionEntity transactionSave = new TransactionEntity();
-
-        data.setDateEmit(LocalDateTime.now());
+//        AccountEntity account= accountRepository.findById()
+        data.setDateEmit(LocalDateTime.now().toString());
+        data.setState("EARRING");
+        data.setType("PAYMENT_QR");
 
         transactionSave = Optional.of(data)
                 .map(mapper :: toTransactionEntity )
@@ -114,24 +136,10 @@ public class TransactionServiceImpl implements TransactionService {
         return false;
     }
 
-
     @Override
-    public TransactionResponseDTO getTrasactionByTypeTransaction(String typeTran) {
-        return null;
+    public void delete(TransactionEntity transactionEntity) {
+
     }
 
-    @Override
-    public TransactionResponseDTO getTrasactionByAmount(Long amount) {
-        return null;
-    }
 
-    @Override
-    public TransactionResponseDTO getTrasactionByDate(Date date) {
-        return null;
-    }
-
-    @Override
-    public TransactionResponseDTO getTrasactionByState(String state) {
-        return null;
-    }
 }
