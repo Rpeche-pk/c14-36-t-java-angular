@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
-import { ChartEvent } from 'chart.js/dist/core/core.plugins';
+import { ChartConfiguration } from 'chart.js';
+
 
 @Component({
   selector: 'app-metricas',
@@ -8,6 +8,7 @@ import { ChartEvent } from 'chart.js/dist/core/core.plugins';
   styleUrls: ['./metricas.component.scss'],
 })
 export class MetricasComponent {
+  
   saldo: string = '1200.00';
   hogar: number = 1200;
   transporte: number = 250;

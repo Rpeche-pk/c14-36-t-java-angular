@@ -14,17 +14,21 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
 import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
 import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
+import { authGuard } from './guards/auth.guard';
+import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
+import { loginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
-  { path: 'user', component: UserDashboardComponent,
+  { path: 'user', component: UserDashboardComponent, canActivate:[authGuard],
     children: [
-      { path: '', redirectTo: 'help', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: DashboardComponent },
       { path: 'credit-card', component: CreditCardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'metricas', component: MetricasComponent },
       { path: 'transfer', component:TransactionComponent},
+      {path : 'promo', component:PromotionsComponent},
       {path: 'help', component: HelpComponent,
         children: [
           { path: '', redirectTo: 'helpReq', pathMatch: 'full' },
@@ -36,8 +40,8 @@ const routes: Routes = [
       { path: 'info-user', component:InfoUserComponent },
     ],
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate:[loginGuard]},
+  { path: 'register', component: RegisterComponent, canActivate:[loginGuard] },
 ];
 
 @NgModule({

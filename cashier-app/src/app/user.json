@@ -22,5 +22,17 @@
     "direccion": "Siempre Vivas 123",
     "password": "123456",
     "password2": "123456"
+  },
+  {
+    "id": "3",
+    "nombre": "Jorge",
+    "apellido": "Ricardo",
+    "dni": "13151088",
+    "telefono": "2615558899",
+    "email": "jr@rick.com",
+    "fechaNac": "1990-08-26",
+    "direccion": "Hongkong",
+    "password": "123456",
+    "password2": "123456"
   }
 ]

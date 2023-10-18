@@ -55,6 +55,14 @@
             transform: translateY(-100px);
           }
         }
+        a{
+          color: $colWhite;
+          @include transitionFast;
+          cursor: pointer;
+          &:hover{
+            color:$colGreenLight;
+          }
+        }
       }
     }
   }
