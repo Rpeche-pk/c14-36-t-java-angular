@@ -1,4 +1,4 @@
-@import "../../../stylesConfig/config";
+@import "../../../../stylesConfig/config";
 .container {
     background-color: $colGreenDark;
     background-image: url('/assets/wave1.png'), url('/assets/wave2.png');
@@ -14,12 +14,12 @@
 }
 
 .container2{
-      height: 150px;
+      height: 100px;
 }
 
 .row{
-    padding-left: 20%; 
-    margin-right: 20%;
+    padding-left: 10%; 
+    margin-right: 10%;
 }
 
 .saldo{
@@ -156,6 +156,13 @@
     border: none;
 }
 
+.custom-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
 @media (min-width: 576px) {
     .container, .container-sm {
         max-width: none; 
@@ -170,11 +177,13 @@
     }
 
     .row{
-        padding-left: 2%; 
-        margin-right: 2%;
+        margin-left: 1%; 
+        margin-right: 1%;
     }
     
 }
+
+
 
 
 

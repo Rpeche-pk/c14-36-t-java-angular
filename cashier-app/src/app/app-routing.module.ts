@@ -13,6 +13,7 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
+import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'home', component: DashboardComponent },
       { path: 'credit-card', component: CreditCardComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'metricas', component: MetricasComponent },
       { path: 'transfer', component:TransactionComponent},
       {path: 'help', component: HelpComponent,
         children: [

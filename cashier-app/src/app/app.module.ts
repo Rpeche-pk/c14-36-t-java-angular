@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { NgChartsModule } from 'ng2-charts';
+
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
@@ -27,6 +29,7 @@ import { InfoUserComponent } from './component/Pages/info-user/info-user.compone
 import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.component';
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { CookieService } from 'ngx-cookie-service';
     SideBarAltComponent,
     UserDashboardComponent,
     HelpQuestionResComponent,
+    MetricasComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ import { CookieService } from 'ngx-cookie-service';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [
     CookieService
