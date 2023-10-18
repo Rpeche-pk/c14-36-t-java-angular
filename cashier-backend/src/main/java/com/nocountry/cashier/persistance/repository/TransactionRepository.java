@@ -1,5 +1,6 @@
 package com.nocountry.cashier.persistance.repository;
 
+import com.nocountry.cashier.enums.EnumsState;
 import com.nocountry.cashier.persistance.entity.TransactionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Meta;
@@ -14,17 +15,17 @@ import java.util.Optional;
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionEntity,String> {
 
-  //List<TransactionEntity> findByStateIs(String state);
-  //List<TransactionEntity> findByStateEquals(String state);
-  //List<TransactionEntity> findByTypeIs(String state);
-  //List<TransactionEntity> findByAmountLessThanEqual(String state);
-//    @Query(value = "SELECT t FROM TransactionEntity t WHERE  t.state = :state")
-//    List<TransactionEntity> findByStateContaining(@Param("state") String state);
+//  List<TransactionEntity> findByStateIs(EnumsState state);
+//  List<TransactionEntity> findByStateEquals(EnumsState state);
+//  List<TransactionEntity> findByTypeIs(EnumsState state);
+//  List<TransactionEntity> findByAmountLessThanEqual(String state);
+   /* @Query(value = "SELECT t FROM TransactionEntity t WHERE  t.state = :state")
+    List<TransactionEntity> findByStateContaining(@Param("state") EnumsState state);
+*/
 
-//  @Query(value = "SELECT t FROM TransactionEntity t WHERE t.state LIKE %:state%")
-//  List<TransactionEntity> findByStateContaining(@Param("state") String state);
+    @Query(value = "SELECT t FROM TransactionEntity t WHERE t.state = :state")
+    List<TransactionEntity> findByState(@Param("state") EnumsState state);
 
-  List<TransactionEntity> findByStateContaining(String state);
 
 
 

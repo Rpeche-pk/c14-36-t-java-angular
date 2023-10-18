@@ -64,7 +64,7 @@ public class TransactionController {
         return ResponseEntity.ok(new GenericResponseDTO<>(true,"Transaccion Encontrada",transactionService.getById(id).get()));
     }
     @GetMapping("/search/state")
-    public ResponseEntity<?> getTransactionsByState(@RequestParam String state) {
+    public ResponseEntity<?> getTransactionsByState(@RequestParam EnumsState state) {
 
 
         try {

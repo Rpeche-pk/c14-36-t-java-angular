@@ -42,10 +42,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TransactionEntity> findByState(String state) throws Exception{
+    public List<TransactionEntity> findByState(EnumsState state) throws Exception{
         try {
 
-            List<TransactionEntity> listEntity = transactionRepository.findByStateContaining(state);
+            List<TransactionEntity> listEntity = transactionRepository.findByState(state);
 
             return listEntity;
         }catch (Exception e){
@@ -62,7 +62,7 @@ public class TransactionServiceImpl implements TransactionService {
         TransactionEntity transactionSave = new TransactionEntity();
 //        AccountEntity account= accountRepository.findById()
         data.setDateEmit(LocalDateTime.now().toString());
-        data.setState("EARRING");
+        data.setState("DONE");
         data.setType("PAYMENT_QR");
 
         transactionSave = Optional.of(data)
