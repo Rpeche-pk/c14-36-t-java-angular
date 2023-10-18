@@ -7,13 +7,16 @@ $colGray:#6C757D;
 @function changeOpacity($color, $opacity){
   @return rgba($color, $opacity);
 }
+
 @mixin changeColorPng ($color){
   filter: drop-shadow(0 100px 0 $color);
   transform: translateY(-100px);
 }
+
 @mixin transitionFast{
   transition: all ease-in-out 0.3s;
 }
+
 @mixin btnStyle($style, $color){
   all:initial;
   margin-bottom: 1rem;

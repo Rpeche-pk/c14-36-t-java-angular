@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DATA } from '../data';
 import { IhelpResponse } from '../Ires';
+import { scaling } from 'src/app/animations/animation';
 
 @Component({
   selector: 'app-help-response',
   templateUrl: './help-response.component.html',
   styleUrls: ['./help-response.component.scss'],
+  animations:[scaling]
 })
 export class HelpResponseComponent {
   responseData!:IhelpResponse;
