@@ -38,22 +38,15 @@ public class AccountController {
     }
 
     @GetMapping("/{idAccount}")
-    public ResponseEntity<AccountEntity> getAccount(@PathVariable String idAccount){
+    public ResponseEntity<AccountResponseDTO> getAccount(@PathVariable String idAccount){
 
-        AccountEntity account = accountService.getAccount(idAccount);
+        AccountResponseDTO account = accountService.getAccount(idAccount);
 
         if(account == null){
             throw new RegisterNotFound("Doesn´t Found account id: " +idAccount);
         }
         return ResponseEntity.ok(account);
     }
-
-   /* @PostMapping
-    public AccountEntity createAccount(@RequestBody AccountEntity account){
-        logger.info("Account to create: " +account);
-        return accountService.createAccount(account);
-
-    }*/
 
     @PostMapping
     public AccountResponseDTO createAccount(@RequestParam("uuidUser") String uuidUser){
@@ -68,12 +61,12 @@ public class AccountController {
     @DeleteMapping("/{idAccount}")
     public ResponseEntity<Map<String, Boolean>>
     deleteAccount(@PathVariable String idAccount){
-        AccountEntity account = accountService.getAccount(idAccount);
+        AccountResponseDTO account = accountService.getAccount(idAccount);
 
         if(account == null){
             throw new RegisterNotFound("ID not found " +idAccount);
         }
-        accountService.deleteAccount(account);
+        accountService.deleteAccount(idAccount);
         //JSON{"delete" : true}
         Map<String, Boolean> response = new HashMap<>();
         response.put("Delete", Boolean.TRUE);

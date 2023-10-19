@@ -37,9 +37,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountEntity getAccount(String idAccount) {
-        AccountEntity account = accountRepository.findById(idAccount).orElse(null);
-        return account;
+    public AccountResponseDTO getAccount(String idAccount) {
+
+        AccountResponseDTO accountResponseDTO =  accountMapper.toGetAccountDTO(accountRepository.findById(idAccount)
+                                                .orElse(null));
+
+        return accountResponseDTO;
     }
 
     @Override
@@ -54,6 +57,13 @@ public class AccountServiceImpl implements AccountService {
         accountEntity.setCvu((GeneratorCVU.generate("452", 22)));
         accountEntity.setStatus(true);
 
+        //lanzar excepcion
+       /*if(userEntity.getAccountEntity().getIdAccount() == null) {
+            //guardar
+        }
+        else{
+
+        }*/
         userEntity.setAccountEntity(accountEntity);
 
         userRepository.save(userEntity);
@@ -64,7 +74,8 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public void deleteAccount(AccountEntity accountEntity) {
-        accountRepository.delete(accountEntity);
+    public void deleteAccount(String uuidAccount) {
+
+        accountRepository.deleteById(uuidAccount);
     }
 }

@@ -64,6 +64,10 @@ public class UserEntity extends Auditable<LocalDateTime> {
     @JoinColumn(name= "id_account")
     private AccountEntity accountEntity;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "id_card")
+    private CreditCardEntity creditCardEntity;
+
    @PrePersist
    public void onCreate() {
        this.setEnabled(Boolean.TRUE);
