@@ -62,10 +62,7 @@ public class UserServiceImpl implements UserService {
         return mapper.toUserResponseDto(userSave);
     }
 
-    @Override
-    public UserResponseDTO createTransaction(UserRequestDTO data, String data2) {
-        return null;
-    }
+
 
     @Override
     @Transactional(readOnly = true)

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransactionService extends ApiCrudGeneric<TransactionRequestDTO, TransactionResponseDTO, PageableDto,String> {
-
+  TransactionResponseDTO createTransaction(TransactionRequestDTO data,String data2);
   @Override
   TransactionResponseDTO create(TransactionRequestDTO data);
   @Override
