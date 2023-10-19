@@ -1,56 +1,40 @@
 package com.nocountry.cashier.persistance.entity;
 
-
-import jakarta.persistence.*;
-
 import com.nocountry.cashier.persistance.entity.listener.audit.Auditable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.math.BigInteger;
 import java.time.LocalDate;
-
 import java.time.LocalDateTime;
-import java.util.List;
-
 
 @Entity
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE account_entity SET enabled=false where id=?")
+@SQLDelete(sql = "UPDATE credit_card_entity SET enabled=false where id=?")
 @Where(clause = "enabled=true")
-public class AccountEntity extends Auditable<LocalDateTime> {
+public class CreditCardEntity extends Auditable<LocalDateTime> {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String idAccount;
+    private String idCard;
 
-    @Column(unique = true, length = 25)
-    private String cvu;
+    @Column(unique = true, length = 16)
+    private String cardNumber;
 
-    private LocalDate openAccountDate;
+    private String cardName;
 
-    private LocalDate updateAccountDate;
+    private LocalDate expirationDate;
 
-    private BigDecimal totalAccount;
-
-    private boolean status;
+    private String securityCode;
 
     private Boolean enabled;
-
-    @OneToMany(mappedBy = "accountEntity")
-    private List<TransactionEntity> transaccionEntityList;
-
-
-
 }
