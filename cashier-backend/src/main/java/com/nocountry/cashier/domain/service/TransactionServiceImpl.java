@@ -7,6 +7,7 @@ import com.nocountry.cashier.domain.usecase.TransactionService;
 import com.nocountry.cashier.enums.EnumsState;
 import com.nocountry.cashier.exception.GenericException;
 import com.nocountry.cashier.exception.ResourceNotFoundException;
+import com.nocountry.cashier.persistance.entity.AccountEntity;
 import com.nocountry.cashier.persistance.entity.TransactionEntity;
 import com.nocountry.cashier.persistance.mapper.TransactionMapper;
 import com.nocountry.cashier.persistance.repository.AccountRepository;
@@ -21,10 +22,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.nocountry.cashier.util.GeneratorCVU;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -40,27 +40,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<TransactionEntity> findByState(EnumsState state) throws Exception{
-        try {
-
-            List<TransactionEntity> listEntity = transactionRepository.findByState(state);
-
-            return listEntity;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-
-
-    }
-
     @Transactional
     @Override
     public TransactionResponseDTO create(TransactionRequestDTO data){
 
         TransactionEntity transactionSave = new TransactionEntity();
-//        AccountEntity account= accountRepository.findById()
+
         data.setDateEmit(LocalDateTime.now().toString());
         data.setState("DONE");
         data.setType("PAYMENT_QR");
@@ -69,10 +54,25 @@ public class TransactionServiceImpl implements TransactionService {
                 .map(mapper :: toTransactionEntity )
                 .map(transactionRepository::save)
                 .orElseThrow(()-> new GenericException("Oops no pudismos resolver la transaccion", HttpStatus.BAD_REQUEST));
+        return mapper.toTransactionResponseDto(transactionSave);
+    }
 
 
+    @Override
+    public TransactionResponseDTO createTransaction(TransactionRequestDTO data, String data2) {
+        TransactionEntity transactionSave = new TransactionEntity();
+        AccountEntity origin = accountRepository.findById(data2).get();
+        data.setOrigin(origin.getCvu().toString());
+        data.setDestination((GeneratorCVU.generate("202",22)));
+        data.setDateEmit(LocalDateTime.now().toString());
+        //data.setState("DONE");
+        //data.setType("PAYMENT_QR");
 
-    return mapper.toTransactionResponseDto(transactionSave);
+        transactionSave = Optional.of(data)
+                .map(mapper :: toTransactionEntity )
+                .map(transactionRepository::save)
+                .orElseThrow(()-> new GenericException("Oops no pudismos resolver la transaccion", HttpStatus.BAD_REQUEST));
+        return mapper.toTransactionResponseDto(transactionSave);
     }
 
     @Override
@@ -88,36 +88,7 @@ public class TransactionServiceImpl implements TransactionService {
         return new PageImpl<>(responseDtoList);
     }
 
-    @Transactional(readOnly = true)
-    public Page<TransactionResponseDTO> getTransactionByType(PageableDto pageableDto,String type){
-        Pageable pageable = utility.setPageable(pageableDto);
-        Page<TransactionEntity> transactions = transactionRepository.findAll(pageable);
-        List<TransactionResponseDTO> responseDtoList = transactions.getContent().
-                stream().filter(x->x.equals(type.toUpperCase())).
-                map(mapper::toTransactionResponseDto).toList();
-        return new PageImpl<>(responseDtoList);
-    }
-    @Transactional(readOnly = true)
-    public Page<TransactionResponseDTO> getTransactionByState(PageableDto pageableDto,String state){
-        Pageable pageable = utility.setPageable(pageableDto);
-        Page<TransactionEntity> transactions = transactionRepository.findAll(pageable);
-        List<TransactionResponseDTO> responseDtoList = transactions.getContent().
-                stream().filter(x->x.equals(state.toUpperCase())).
-                map(mapper::toTransactionResponseDto).toList();
-        return new PageImpl<>(responseDtoList);
-    }
-    @Transactional(readOnly = true)
-    public Page<TransactionResponseDTO> getTransactionByDate(PageableDto pageableDto,Date date){
-        Pageable pageable = utility.setPageable(pageableDto);
-        Page<TransactionEntity> transactions = transactionRepository.findAll(pageable);
-        //Predicate<TransactionEntity> predicate = transactions.forEach(transactionEntity -> transactionEntity.getDateEmit())==date;
-        List<TransactionResponseDTO> responseDtoList = transactions.getContent().
-                stream().filter(x-> {
-                    return x.getDateEmit() == date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                }).
-                map(mapper::toTransactionResponseDto).toList();
-        return new PageImpl<>(responseDtoList);
-    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<TransactionResponseDTO> getById(String s) {
@@ -126,9 +97,78 @@ public class TransactionServiceImpl implements TransactionService {
         return Optional.of(mapper.toTransactionResponseDto(transactionEntity));
     }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TransactionEntity> findByState(EnumsState state) throws Exception{
+        try {
+            List<TransactionEntity> listEntity = transactionRepository.findByState(state);
+            return listEntity;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public List<TransactionEntity> findByTypeIs(EnumsState type) throws Exception{
+        try {
+            List<TransactionEntity> listEntity = transactionRepository.findByTypeIs(type);
+            return listEntity;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public List<TransactionEntity> findByAmount(BigDecimal amount) throws Exception{
+        try {
+            List<TransactionEntity> listEntity = transactionRepository.findByType(amount);
+            return listEntity;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+//    @Transactional(readOnly = true)
+//    public Page<TransactionResponseDTO> getTransactionByType(PageableDto pageableDto,String type){
+//        Pageable pageable = utility.setPageable(pageableDto);
+//        Page<TransactionEntity> transactions = transactionRepository.findAll(pageable);
+//        List<TransactionResponseDTO> responseDtoList = transactions.getContent().
+//                stream().filter(x->x.equals(type.toUpperCase())).
+//                map(mapper::toTransactionResponseDto).toList();
+//        return new PageImpl<>(responseDtoList);
+//    }
+//    @Transactional(readOnly = true)
+//    public Page<TransactionResponseDTO> getTransactionByState(PageableDto pageableDto,String state){
+//        Pageable pageable = utility.setPageable(pageableDto);
+//        Page<TransactionEntity> transactions = transactionRepository.findAll(pageable);
+//        List<TransactionResponseDTO> responseDtoList = transactions.getContent().
+//                stream().filter(x->x.equals(state.toUpperCase())).
+//                map(mapper::toTransactionResponseDto).toList();
+//        return new PageImpl<>(responseDtoList);
+//    }
+//    @Transactional(readOnly = true)
+//    public Page<TransactionResponseDTO> getTransactionByDate(PageableDto pageableDto,Date date){
+//        Pageable pageable = utility.setPageable(pageableDto);
+//        Page<TransactionEntity> transactions = transactionRepository.findAll(pageable);
+//        //Predicate<TransactionEntity> predicate = transactions.forEach(transactionEntity -> transactionEntity.getDateEmit())==date;
+//        List<TransactionResponseDTO> responseDtoList = transactions.getContent().
+//                stream().filter(x-> {
+//                    return x.getDateEmit() == date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+//                }).
+//                map(mapper::toTransactionResponseDto).toList();
+//        return new PageImpl<>(responseDtoList);
+//    }
+
+
     @Override
     public TransactionResponseDTO update(String s, TransactionRequestDTO data) {
         return null;
+    }
+
+    @Override
+    public void delete(TransactionEntity transactionEntity) {
+
     }
 
     @Override
@@ -136,10 +176,7 @@ public class TransactionServiceImpl implements TransactionService {
         return false;
     }
 
-    @Override
-    public void delete(TransactionEntity transactionEntity) {
 
-    }
 
 
 }

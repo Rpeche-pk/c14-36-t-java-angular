@@ -31,7 +31,7 @@ public class TransactionRequestDTO implements Serializable {
     private BigDecimal amount;
     @NotEmpty(message = "Debe Ingresar El Origen De La Transaccion")
     @NotBlank(message = "no debe consistir solo en espacios en blanco")
-    private Integer origin;
+    private String origin;
     @NotEmpty(message = "Debe Ingresar El Destino De La Transaccion")
     @NotBlank(message = "no debe consistir solo en espacios en blanco")
     private String destination;

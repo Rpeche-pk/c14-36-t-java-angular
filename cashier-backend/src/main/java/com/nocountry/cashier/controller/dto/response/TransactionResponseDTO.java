@@ -16,8 +16,8 @@ public record TransactionResponseDTO(
         String type,
 
         Long amount,
-        Long origin,
-        Long destination,
+        String origin,
+        String destination,
         String state
         ) implements Serializable {
     @Serial

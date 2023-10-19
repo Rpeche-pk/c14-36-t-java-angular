@@ -63,6 +63,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponseDTO createTransaction(UserRequestDTO data, String data2) {
+        return null;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<UserResponseDTO> getAll(PageableDto pageableDto) {
         Pageable pageable = utility.setPageable(pageableDto);

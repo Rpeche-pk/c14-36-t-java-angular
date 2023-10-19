@@ -30,16 +30,16 @@ public class TransactionEntity extends Auditable<LocalDateTime> {
     private String id;
     @Column(name = "date_emit")
     private LocalDateTime dateEmit;
-    @Enumerated(EnumType.STRING)
     //INCOME,EGRESS,TRANSFER,DEPOSIT,PAYMENT_QR
+    @Enumerated(EnumType.STRING)
     @Column(name = "type_trans")
     private EnumsTransactions type;
     @Column(name="amount")
     private BigDecimal amount;
     @Column(name = "origin")
-    private Long origin; // String cvu
+    private String origin; // String cvu
     @Column(name = "destination")
-    private Long destination;
+    private String destination;
     //STATE WITH enums OR boolean?
     //private Boolean state;
     @Enumerated(EnumType.STRING)
