@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   user!: FormGroup<User | any>;
+  eyeStatus = false;
 
   constructor(
     private userService: UserService,
@@ -27,10 +28,11 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(userData).subscribe(
       (response) => {
         if (response.message == 'Authenticación correcta') {
+          localStorage.setItem("token", response.token)
           this.router.navigate(['/user']);
         }
         console.log(response);
-        
+
       },
       (error) => {
         console.error(error);

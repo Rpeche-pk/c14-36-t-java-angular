@@ -10,22 +10,22 @@
       <!-- ------------------------------formulario de login -------------->
       <form class="loginBox__left__container__form" [formGroup]="user">
         <div class="loginBox__left__container__form__field">
-          <label for="user">Usuario</label>
+          <label for="user">Correo</label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="text" id="user"
-            formControlName="email" placeholder="Nombre de usuario" />
-            <img src="assets/icon.png" alt="person_icon" />
+            <input type="email" id="user"
+            formControlName="email" placeholder="example@gmail.com" />
+            <img src="assets/email.png" alt="person_icon" />
           </div>
         </div>
 
         <div class="loginBox__left__container__form__field">
           <label for="pass">Contraseña </label>
           <div class="loginBox__left__container__form__field__box">
-            <input type="password" id="pass" placeholder="********" 
+            <input [type]="eyeStatus? 'text':'password'" id="pass" placeholder="********"
             formControlName="password"/>
             <img src="assets/llave.png" alt="key_icon" />
-            <button>
-              <img class="eye" src="assets/eyeClose.png" alt="eye_icon" />
+            <button (click)="eyeStatus = !eyeStatus ">
+              <img class="eye" [src]="eyeStatus ? 'assets/eyeOpen.png' : 'assets/eyeClose.png'" alt="eye_icon" />
             </button>
           </div>
         </div>

@@ -36,7 +36,7 @@ export class UserService {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
 
-  loginUser(user: User): Observable<any> {
+  loginUser(user: User) {
     const body = {
       email: user.email,
       password: user.password,
