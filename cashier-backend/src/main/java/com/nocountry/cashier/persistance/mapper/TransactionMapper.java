@@ -3,7 +3,6 @@ package com.nocountry.cashier.persistance.mapper;
 import com.nocountry.cashier.controller.dto.request.TransactionRequestDTO;
 import com.nocountry.cashier.controller.dto.response.TransactionResponseDTO;
 import com.nocountry.cashier.persistance.entity.TransactionEntity;
-import org.hibernate.Transaction;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -29,7 +28,13 @@ public interface TransactionMapper {
     TransactionResponseDTO toTransactionResponseDto(TransactionEntity transactionEntity);
 
     List<TransactionRequestDTO> toTransactionRequestDtoList (List<TransactionEntity> transactionEntityList);
-    List<TransactionEntity> toGetPTransactionEntityList(List<TransactionRequestDTO> transactionEntitRequestDTOList);
+    List<TransactionEntity> toTransactionEntityList(List<TransactionRequestDTO> transactiRequestDTOList);
 
-
+    /*
+    * GetProduct producToGetDTO(Product product);
+    @InheritInverseConfiguration
+    Product toEnity(GetProduct getProduct);
+    List<GetProduct> toGetProductList(List<Product> productList);
+    List<Product> toEntityList(List<GetProduct> getProductList);
+*/
 }

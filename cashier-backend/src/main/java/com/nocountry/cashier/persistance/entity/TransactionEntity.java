@@ -10,6 +10,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE transaction SET enabled=false where id=?")
-@Where(clause = "enabled=true")
+//@SQLDelete(sql = "UPDATE transaction SET enabled=false where id=?")
+//@Where(clause = "enabled=true")
 public class TransactionEntity extends Auditable<LocalDateTime> {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -29,16 +30,16 @@ public class TransactionEntity extends Auditable<LocalDateTime> {
     private String id;
     @Column(name = "date_emit")
     private LocalDateTime dateEmit;
-    @Enumerated(EnumType.STRING)
     //INCOME,EGRESS,TRANSFER,DEPOSIT,PAYMENT_QR
+    @Enumerated(EnumType.STRING)
     @Column(name = "type_trans")
     private EnumsTransactions type;
     @Column(name="amount")
-    private Long  amount;
+    private BigDecimal amount;
     @Column(name = "origin")
-    private Long origin; // String cvu
+    private String origin; // String cvu
     @Column(name = "destination")
-    private Long destination;
+    private String destination;
     //STATE WITH enums OR boolean?
     //private Boolean state;
     @Enumerated(EnumType.STRING)

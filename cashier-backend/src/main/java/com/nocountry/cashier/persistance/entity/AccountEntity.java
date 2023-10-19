@@ -26,8 +26,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE account_entity SET enabled=false where id=?")
-@Where(clause = "enabled=true")
+//@SQLDelete(sql = "UPDATE account_entity SET enabled=false where id=?")
+//@Where(clause = "enabled=true")
 public class AccountEntity extends Auditable<LocalDateTime> {
 
     @Id
