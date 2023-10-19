@@ -7,17 +7,17 @@ import { BehaviorSubject } from 'rxjs';
 export class TokenService {
 
   constructor() {
-    window.addEventListener('storage',()=>{
-      this.tokenStatus.next(this.hasToken())
-    })
+    // window.addEventListener('storage',()=>{
+    //   this.tokenStatus.next(this.hasToken())
+    // })
    }
-  private tokenStatus = new BehaviorSubject<boolean>(this.hasToken());
+  // private tokenStatus = new BehaviorSubject<boolean>(this.hasToken());
 
-  public hasToken(){
-    return localStorage.getItem('token') !== null;
-  }
+  // public hasToken(){
+  //   return localStorage.getItem('token') !== null;
+  // }
 
-  watchToken(){
-    return this.tokenStatus.asObservable();
-  }
+  // watchToken(){
+  //   return this.tokenStatus.asObservable();
+  // }
 }

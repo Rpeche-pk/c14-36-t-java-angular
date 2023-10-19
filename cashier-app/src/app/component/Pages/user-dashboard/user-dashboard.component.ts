@@ -19,11 +19,11 @@ export class UserDashboardComponent {
 
   }
   ngOnInit(){
-    this.tokenService.watchToken().subscribe(res=>{
-      if(!res){
-        this.router.navigate(['login'])
-      }
-    })
+    // this.tokenService.watchToken().subscribe(res=>{
+    //   if(!res){
+    //     this.router.navigate(['login'])
+    //   }
+    // })
   }
 
 }
