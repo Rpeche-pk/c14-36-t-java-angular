@@ -28,6 +28,7 @@ import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.componen
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
+import { Found404Component } from './component/Pages/found404/found404.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { PromotionsComponent } from './component/Pages/promotions/promotions.com
     UserDashboardComponent,
     HelpQuestionResComponent,
     PromotionsComponent,
+    Found404Component,
   ],
   imports: [
     BrowserModule,
