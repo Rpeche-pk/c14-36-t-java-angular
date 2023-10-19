@@ -25,6 +25,7 @@ import static com.nocountry.cashier.util.Constant.*;
  * @license Lrpa, zephyr cygnus
  * @since 12/10/2023
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = API_VERSION )
@@ -36,8 +37,8 @@ public class AuthController {
         return ResponseEntity.ok().body(Map.of("data",register));
     }
 
-    @GetMapping(RESOURCE_AUTH+"/")
-    public ResponseEntity<?> authenticateCustomer(@Valid @RequestBody AuthRequestDTO authDto,HttpServletRequest request){
+    @PostMapping(RESOURCE_AUTH+"/")
+    public ResponseEntity<?> authenticateCustomer(@Valid @RequestBody AuthRequestDTO authDto){
 
         //        String token = request.getHeader("Authorization");
 
