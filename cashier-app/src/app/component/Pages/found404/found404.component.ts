@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-found404',
@@ -7,7 +8,16 @@ import { Component } from '@angular/core';
 })
 export class Found404Component {
   hasToken = false;
-  constructor(){
+  constructor(private router:Router){
     this.hasToken = localStorage.getItem('token') !== null;
+  }
+
+  redirect(){
+    if(this.hasToken){
+      this.router.navigate(['user'])
+    }
+    else{
+      this.router.navigate(['login'])
+    }
   }
 }
