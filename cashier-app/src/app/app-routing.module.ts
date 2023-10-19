@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './component/Pages/home/home.component';
 import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
 
 import { LoginComponent } from './component/Pages/login/login.component';
@@ -13,13 +12,14 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
-import { authGuard } from './guards/auth.guard';
-import { loginGuard } from './guards/login.guard';
+// import { authGuard } from './guards/auth.guard';
+// import { loginGuard } from './guards/login.guard';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
-  { path: 'user', component: UserDashboardComponent, canActivate:[authGuard],
+  { path: 'user', component: UserDashboardComponent, 
+  // canActivate:[authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: DashboardComponent },
@@ -38,8 +38,12 @@ const routes: Routes = [
       { path: 'info-user', component:InfoUserComponent },
     ],
   },
-  { path: 'login', component: LoginComponent, canActivate:[loginGuard]},
-  { path: 'register', component: RegisterComponent, canActivate:[loginGuard] },
+  { path: 'login', component: LoginComponent, 
+  // canActivate:[loginGuard]
+},
+  { path: 'register', component: RegisterComponent, 
+  // canActivate:[loginGuard] 
+},
 ];
 
 @NgModule({
