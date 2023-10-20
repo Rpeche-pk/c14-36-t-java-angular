@@ -12,6 +12,7 @@ public final class Constant {
     public static final String RESOURCE_AUTH= "/auth";
     public static final String RESOURCE_REGISTER= "/register";
     public static final String RESOURCE_USER= "/customers";
+
     public static final String RESOURCE_IMAGE= "/images";
     public static final String RESOURECE_TRANSACTION= "/transactions";
 
