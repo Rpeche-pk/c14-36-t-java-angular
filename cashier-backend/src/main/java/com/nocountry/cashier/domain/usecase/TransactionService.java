@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransactionService extends ApiCrudGeneric<TransactionRequestDTO, TransactionResponseDTO, PageableDto,String> {
-  TransactionResponseDTO createTransaction(TransactionRequestDTO data,String data2);
+  TransactionResponseDTO createTransaction(TransactionRequestDTO data,String idAccount);
   @Override
   TransactionResponseDTO create(TransactionRequestDTO data);
   @Override
   Optional<TransactionResponseDTO> getById(String s);
   @Override
   Page<TransactionResponseDTO> getAll(PageableDto pageable);
-  List<TransactionEntity> findByState(EnumsState state) throws Exception;
+  List<TransactionEntity> findByState(EnumsState state,String idAccount) throws Exception;
   List<TransactionEntity> findByTypeIs(EnumsState type) throws Exception;
   List<TransactionEntity> findByAmount(BigDecimal amount) throws Exception;
 

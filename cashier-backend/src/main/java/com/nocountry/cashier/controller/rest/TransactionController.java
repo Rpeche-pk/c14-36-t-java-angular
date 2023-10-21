@@ -67,7 +67,7 @@ public class TransactionController {
         TransactionResponseDTO transactionResponse = transactionService.createTransaction(requestDTO,idAccount);
 //        String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("")
 //                .path("{id}").buildAndExpand(transactionResponse.id()).toUriString();
-        return ResponseEntity.status(CREATED).body(transactionResponse.state());
+        return ResponseEntity.status(CREATED).body(transactionResponse.toString());
     }
     //SearchById
     //http://localhost:8080/v1/api/customers/transactions/search/58c6f82a-57f0-4b74-ba56-2dfcd6665a54
@@ -78,11 +78,11 @@ public class TransactionController {
     //SearchByState
     //http://localhost:8080/v1/api/customers/transactions/search/state?state=DONE
     @GetMapping("/search/state")
-    public ResponseEntity<?> getTransactionsByState(@RequestParam EnumsState state) {
+    public ResponseEntity<?> getTransactionsByState(@RequestParam String idAccount,@RequestParam EnumsState state) {
 
 
         try {
-            return ResponseEntity.status(OK).body(transactionService.findByState(state));
+            return ResponseEntity.status(OK).body(transactionService.findByState(state,idAccount));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "}"));
         }

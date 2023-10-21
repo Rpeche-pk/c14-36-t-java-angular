@@ -18,16 +18,20 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity,S
 
 //  List<TransactionEntity> findByStateIs(EnumsState state);
 //  List<TransactionEntity> findByStateEquals(EnumsState state);
-  List<TransactionEntity> findByTypeIs(EnumsState state);
+  //List<TransactionEntity> findByTypeIs(EnumsState state);
 //  List<TransactionEntity> findByAmountLessThanEqual(String state);
    /* @Query(value = "SELECT t FROM TransactionEntity t WHERE  t.state = :state")
     List<TransactionEntity> findByStateContaining(@Param("state") EnumsState state);
 */
 
-    @Query(value = "SELECT t FROM TransactionEntity t WHERE t.state = :state")
-    List<TransactionEntity> findByState(@Param("state") EnumsState state);
-//    @Query(value = "SELECT t FROM TransactionEntity t WHERE t.type = :type")
-//    List<TransactionEntity> findByType(@Param("type_t") EnumsState type);
+//    @Query(value = "SELECT t FROM TransactionEntity t WHERE t.state = :state AND t.id_account = :accountEntity.id_account")
+//    List<TransactionEntity> findByState(@Param("state") EnumsState state,@Param("id_account") String id_account);
+
+    @Query(value = "SELECT t FROM TransactionEntity t WHERE t.state = :state AND t.accountEntity.idAccount= :id_account")
+    List<TransactionEntity> findByState(@Param("state") EnumsState state, @Param("id_account") String id_account);
+
+    @Query(value = "SELECT t FROM TransactionEntity t WHERE t.type = :type")
+    List<TransactionEntity> findByType(@Param("type") EnumsState type);
 
     @Query(value = "SELECT t FROM TransactionEntity t WHERE t.amount = :amount")
     List<TransactionEntity> findByType(@Param("amount")BigDecimal amount);

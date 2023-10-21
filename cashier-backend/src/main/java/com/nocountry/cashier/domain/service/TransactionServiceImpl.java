@@ -2,6 +2,7 @@ package com.nocountry.cashier.domain.service;
 
 import com.nocountry.cashier.controller.dto.request.PageableDto;
 import com.nocountry.cashier.controller.dto.request.TransactionRequestDTO;
+import com.nocountry.cashier.controller.dto.response.AccountResponseDTO;
 import com.nocountry.cashier.controller.dto.response.TransactionResponseDTO;
 import com.nocountry.cashier.domain.usecase.TransactionService;
 import com.nocountry.cashier.enums.EnumsState;
@@ -9,6 +10,7 @@ import com.nocountry.cashier.exception.GenericException;
 import com.nocountry.cashier.exception.ResourceNotFoundException;
 import com.nocountry.cashier.persistance.entity.AccountEntity;
 import com.nocountry.cashier.persistance.entity.TransactionEntity;
+import com.nocountry.cashier.persistance.mapper.AccountMapper;
 import com.nocountry.cashier.persistance.mapper.TransactionMapper;
 import com.nocountry.cashier.persistance.repository.AccountRepository;
 import com.nocountry.cashier.persistance.repository.TransactionRepository;
@@ -36,11 +38,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final TransactionMapper mapper;
+    private final AccountMapper accountMapper;
     private final Utility utility;
     @Autowired
     private AccountRepository accountRepository;
 
-    @Transactional
+
+
     @Override
     public TransactionResponseDTO create(TransactionRequestDTO data){
 
@@ -56,23 +60,37 @@ public class TransactionServiceImpl implements TransactionService {
                 .orElseThrow(()-> new GenericException("Oops no pudismos resolver la transaccion", HttpStatus.BAD_REQUEST));
         return mapper.toTransactionResponseDto(transactionSave);
     }
-
-
+    @Transactional
     @Override
     public TransactionResponseDTO createTransaction(TransactionRequestDTO data, String data2) {
-        TransactionEntity transactionSave = new TransactionEntity();
-        AccountEntity origin = accountRepository.findById(data2).get();
-        data.setOrigin(origin.getCvu().toString());
+        TransactionEntity transaction = new TransactionEntity();
+        Optional<AccountEntity> entity = accountRepository.findById(data2);
+        //AccountResponseDTO accountResponseDTO = accountService.getAccount(data2);
+//        System.out.println("+++++++++++++++++++++++++++++++++++++"+entity);
+//        transaction.setAccountEntity(entity);
+//        System.out.println("+++++++++++++++++++++++++++++++++++++"+transaction.toString());
+
+        data.setOrigin(entity.get().getCvu().toString());
         data.setDestination((GeneratorCVU.generate("202",22)));
         data.setDateEmit(LocalDateTime.now().toString());
+
         //data.setState("DONE");
         //data.setType("PAYMENT_QR");
+        if (entity.isPresent()) {
+            transaction = Optional.of(data)
+                    .map(mapper::toTransactionEntity)
+                    .map(transactionRepository::save)
+                    .orElseThrow(() -> new GenericException("Oops no pudismos resolver la transaccion", HttpStatus.BAD_REQUEST));
+            transaction.setAccountEntity(entity.get());
+           // System.out.println("+++++++++++++++++++++++++++++++++++++" + transaction.toString());
+            return mapper.toTransactionResponseDto(transaction);
+        }else{
 
-        transactionSave = Optional.of(data)
-                .map(mapper :: toTransactionEntity )
-                .map(transactionRepository::save)
-                .orElseThrow(()-> new GenericException("Oops no pudismos resolver la transaccion", HttpStatus.BAD_REQUEST));
-        return mapper.toTransactionResponseDto(transactionSave);
+            transaction.setAccountEntity(entity.get());
+//            System.out.println("+++++++++++++++++++++++++++++++++++++" + transaction.toString());
+            return mapper.toTransactionResponseDto(transaction);
+        }
+
     }
 
     @Override
@@ -100,9 +118,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TransactionEntity> findByState(EnumsState state) throws Exception{
+    public List<TransactionEntity> findByState(EnumsState state,String idAccount) throws Exception{
         try {
-            List<TransactionEntity> listEntity = transactionRepository.findByState(state);
+            List<TransactionEntity> listEntity = transactionRepository.findByState(state,idAccount);
             return listEntity;
         }catch (Exception e){
             throw new Exception(e.getMessage());
@@ -112,7 +130,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional(readOnly = true)
     public List<TransactionEntity> findByTypeIs(EnumsState type) throws Exception{
         try {
-            List<TransactionEntity> listEntity = transactionRepository.findByTypeIs(type);
+            List<TransactionEntity> listEntity = transactionRepository.findByType(type);
             return listEntity;
         }catch (Exception e){
             throw new Exception(e.getMessage());
