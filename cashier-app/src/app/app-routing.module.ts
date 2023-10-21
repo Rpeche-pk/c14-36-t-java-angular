@@ -16,6 +16,7 @@ import { authGuard } from './guards/auth.guard';
 import { loginGuard } from './guards/login.guard';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 import { Found404Component } from './component/Pages/found404/found404.component';
+import { ServicePageComponent } from './component/Pages/service-page/service-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
@@ -27,7 +28,8 @@ const routes: Routes = [
     { path: 'credit-card', component: CreditCardComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'transfer', component:TransactionComponent},
-    {path : 'promo', component:PromotionsComponent},
+    { path : 'promo', component:PromotionsComponent},
+    { path: 'service', component:ServicePageComponent },
     {path: 'help', component: HelpComponent,
     children: [
       { path: '', redirectTo: 'helpReq', pathMatch: 'full' },
