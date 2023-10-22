@@ -30,6 +30,8 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
 import { CookieService } from 'ngx-cookie-service';
 import { NgChartsModule } from 'ng2-charts';
 import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
+import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
+import { Found404Component } from './component/Pages/found404/found404.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas
     UserDashboardComponent,
     HelpQuestionResComponent,
     MetricasComponent
+    PromotionsComponent,
+    Found404Component,
   ],
   imports: [
     BrowserModule,

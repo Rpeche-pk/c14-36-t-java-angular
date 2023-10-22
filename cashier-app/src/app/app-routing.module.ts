@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './component/Pages/home/home.component';
 import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
 
 import { LoginComponent } from './component/Pages/login/login.component';
@@ -13,10 +12,10 @@ import { HelpQuestionResComponent } from './component/Pages/helpPages/help-quest
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { InfoUserComponent } from './component/Pages/info-user/info-user.component';
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
-import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
 import { authGuard } from './guards/auth.guard';
-import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 import { loginGuard } from './guards/login.guard';
+import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
+import { Found404Component } from './component/Pages/found404/found404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
@@ -40,8 +39,16 @@ const routes: Routes = [
       { path: 'info-user', component:InfoUserComponent },
     ],
   },
-  { path: 'login', component: LoginComponent, canActivate:[loginGuard]},
-  { path: 'register', component: RegisterComponent, canActivate:[loginGuard] },
+  { path: 'info-user', component:InfoUserComponent },
+],
+},
+{ path: 'login', component: LoginComponent,
+canActivate:[loginGuard]
+},
+{ path: 'register', component: RegisterComponent,
+canActivate:[loginGuard]
+},
+{ path:'**', component:Found404Component, pathMatch:'full'},
 ];
 
 @NgModule({
