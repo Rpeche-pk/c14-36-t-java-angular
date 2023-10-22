@@ -14,6 +14,7 @@ public final class Constant {
     public static final String RESOURCE_USER= "/customers";
     public static final String RESOURCE_ACCOUNT= "/accounts";
     public static final String RESOURCE_CARD= "/cards";
+
     public static final String RESOURCE_IMAGE= "/images";
     public static final String RESOURECE_TRANSACTION= "/transactions";
 
