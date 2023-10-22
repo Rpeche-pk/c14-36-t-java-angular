@@ -11,5 +11,7 @@ public interface CreditCardService {
     List<CreditCardResponseDTO> getAllCards();
 
     CreditCardResponseDTO getCard(String idCard);
-    public CreditCardEntity createCard(String uuidUser);
+    public CreditCardResponseDTO createCard(String uuidUser);
+
+    void deleteCard(String idCard);
 }
