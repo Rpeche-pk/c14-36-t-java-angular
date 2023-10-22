@@ -17,25 +17,15 @@ import java.util.Optional;
 public interface TransactionService extends ApiCrudGeneric<TransactionRequestDTO, TransactionResponseDTO, PageableDto,String> {
   TransactionResponseDTO createTransaction(TransactionRequestDTO data,String idAccount);
   @Override
-  TransactionResponseDTO create(TransactionRequestDTO data);
-  @Override
   Optional<TransactionResponseDTO> getById(String s);
   @Override
   Page<TransactionResponseDTO> getAll(PageableDto pageable);
-
   Page<TransactionResponseDTO> findByState(EnumsState state,String idAccount,PageableDto pageableDto) throws Exception;
   //  List<TransactionEntity> findByState(EnumsState state,String idAccount) throws Exception;
   Page<TransactionResponseDTO> findByType(EnumsTransactions type, String idAccount, PageableDto pageableDto) throws Exception;
   //  List<TransactionEntity> findByTypeIs(EnumsState type) throws Exception;
   //List<TransactionEntity> findByAmount(BigDecimal amount) throws Exception;
   Page<TransactionResponseDTO> findByAmount(BigDecimal amount, String idAccount, PageableDto pageableDto) throws Exception;
-
-
-
-
-
-
-
 
   @Override
   TransactionResponseDTO update(String s, TransactionRequestDTO data);
