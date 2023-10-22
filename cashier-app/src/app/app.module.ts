@@ -29,6 +29,7 @@ import { UserDashboardComponent } from './component/Pages/user-dashboard/user-da
 import { CookieService } from 'ngx-cookie-service';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 import { Found404Component } from './component/Pages/found404/found404.component';
+import { ServicePageComponent } from './component/Pages/service-page/service-page.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { Found404Component } from './component/Pages/found404/found404.component
     HelpQuestionResComponent,
     PromotionsComponent,
     Found404Component,
+    ServicePageComponent,
   ],
   imports: [
     BrowserModule,
