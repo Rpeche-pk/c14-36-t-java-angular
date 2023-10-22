@@ -2,17 +2,14 @@ package com.nocountry.cashier.controller.rest;
 
 import com.nocountry.cashier.controller.dto.request.PageableDto;
 import com.nocountry.cashier.controller.dto.request.TransactionRequestDTO;
-import com.nocountry.cashier.controller.dto.request.UserRequestDTO;
 import com.nocountry.cashier.controller.dto.response.GenericResponseDTO;
 import com.nocountry.cashier.controller.dto.response.TransactionResponseDTO;
-import com.nocountry.cashier.controller.dto.response.UserResponseDTO;
 import com.nocountry.cashier.enums.EnumsState;
+
 import com.nocountry.cashier.enums.EnumsTransactions;
 import com.nocountry.cashier.exception.RegisterNotFound;
+
 import com.nocountry.cashier.domain.usecase.TransactionService;
-import com.nocountry.cashier.persistance.entity.TransactionEntity;
-import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
