@@ -54,7 +54,7 @@ import { Found404Component } from './component/Pages/found404/found404.component
     SideBarAltComponent,
     UserDashboardComponent,
     HelpQuestionResComponent,
-    MetricasComponent
+    MetricasComponent,
     PromotionsComponent,
     Found404Component,
   ],
