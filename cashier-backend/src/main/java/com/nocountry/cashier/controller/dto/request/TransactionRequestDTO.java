@@ -1,6 +1,8 @@
 package com.nocountry.cashier.controller.dto.request;
 
 
+import com.nocountry.cashier.persistance.entity.AccountEntity;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -36,5 +38,8 @@ public class TransactionRequestDTO implements Serializable {
     @NotBlank(message = "no debe consistir solo en espacios en blanco")
     private String destination;
     private String state;
+    private String id_account;
+//    @OneToMany
+    private AccountEntity account;
 
 }

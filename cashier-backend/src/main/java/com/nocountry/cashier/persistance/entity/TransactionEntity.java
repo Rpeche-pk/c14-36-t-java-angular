@@ -8,12 +8,9 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "transaction")
@@ -21,8 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-//@SQLDelete(sql = "UPDATE transaction SET enabled=false where id=?")
-//@Where(clause = "enabled=true")
+@ToString
+@SQLDelete(sql = "UPDATE transaction SET enabled=false where id=?")
+@Where(clause = "enabled=true")
 public class TransactionEntity extends Auditable<LocalDateTime> {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -48,8 +46,20 @@ public class TransactionEntity extends Auditable<LocalDateTime> {
 
     private Boolean enabled;
 
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "account_entity")
+//    private AccountEntity accountEntity;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "account_entity")
+//    private AccountEntity accountEntity;
+
     @ManyToOne
-    @JoinColumn(name = "id_account")
+    @JoinColumn(name = "account_entity")
     private AccountEntity accountEntity;
+
+    @PrePersist
+    public void onCreate() {
+        this.setEnabled(Boolean.TRUE);
+    }
 
 }
