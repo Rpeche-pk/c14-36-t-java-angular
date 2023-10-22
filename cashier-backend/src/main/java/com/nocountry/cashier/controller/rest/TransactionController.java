@@ -7,6 +7,7 @@ import com.nocountry.cashier.controller.dto.response.GenericResponseDTO;
 import com.nocountry.cashier.controller.dto.response.TransactionResponseDTO;
 import com.nocountry.cashier.controller.dto.response.UserResponseDTO;
 import com.nocountry.cashier.enums.EnumsState;
+import com.nocountry.cashier.enums.EnumsTransactions;
 import com.nocountry.cashier.exception.RegisterNotFound;
 import com.nocountry.cashier.domain.usecase.TransactionService;
 import com.nocountry.cashier.persistance.entity.TransactionEntity;
@@ -78,11 +79,18 @@ public class TransactionController {
     //SearchByState
     //http://localhost:8080/v1/api/customers/transactions/search/state?state=DONE
     @GetMapping("/search/state")
-    public ResponseEntity<?> getTransactionsByState(@RequestParam String idAccount,@RequestParam EnumsState state) {
-
+    public ResponseEntity<?> getTransactionsByState(@RequestParam String idAccount,
+                                                    @RequestParam EnumsState state,
+                                                    @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                    @RequestParam(value = "size", defaultValue = "4") Integer size,
+                                                    PageableDto pageableDto) {
+        pageableDto.setPage(page);
+        pageableDto.setSize(size);
 
         try {
-            return ResponseEntity.status(OK).body(transactionService.findByState(state,idAccount));
+            List<TransactionResponseDTO> content = transactionService.findByState(state, idAccount,pageableDto).getContent();
+            Map<String, Object> response = Map.of("message", "Listado Por Estado De Transaccion", "data", content);
+            return new ResponseEntity<>(response, OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "}"));
         }
@@ -93,29 +101,42 @@ public class TransactionController {
     //SearchByType
     //http://localhost:8080/v1/api/customers/transactions/search/type?type=DEPOSIT
     @GetMapping("/search/type")
-    public ResponseEntity<?> getTransactionsByType(@RequestParam EnumsState type) {
+    public ResponseEntity<?> getTransactionsByType(@RequestParam String idAccount,
+    @RequestParam EnumsTransactions type,
+    @RequestParam(value = "page", defaultValue = "0") Integer page,
+    @RequestParam(value = "size", defaultValue = "4") Integer size,
+    PageableDto pageableDto) {
 
+
+        pageableDto.setPage(page);
+        pageableDto.setSize(size);
 
         try {
-            return ResponseEntity.status(OK).body(transactionService.findByTypeIs(type));
+            List<TransactionResponseDTO> content = transactionService.findByType(type, idAccount,pageableDto).getContent();
+            Map<String, Object> response = Map.of("message", "Listado Por Tipo De Transacccion", "data", content);
+            return new ResponseEntity<>(response, OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "}"));
         }
-
 
     }
     //SearchByAmount
     //http://localhost:8080/v1/api/customers/transactions/search/amount?amount=900
     @GetMapping("/search/amount")
-    public ResponseEntity<?> getTransactionsByAmount(@RequestParam BigDecimal amount) {
-
+    public ResponseEntity<?> getTransactionsByAmount(@RequestParam String idAccount,
+                                                     @RequestParam BigDecimal amount,
+                                                     @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                     @RequestParam(value = "size", defaultValue = "4") Integer size,
+                                                     PageableDto pageableDto) {
 
         try {
-            return ResponseEntity.status(OK).body(transactionService.findByAmount(amount));
+            List<TransactionResponseDTO> content = transactionService.findByAmount(amount ,idAccount,pageableDto).getContent();
+            Map<String, Object> response = Map.of("message", "Listado Por De Transacciones Por Monto", "data", content);
+            return new ResponseEntity<>(response, OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "}"));
-        }
 
+        }
 
     }
 //    public ResponseEntity<?> getTransactionsByType(@RequestParam(value = "page", defaultValue = "0") Integer page,

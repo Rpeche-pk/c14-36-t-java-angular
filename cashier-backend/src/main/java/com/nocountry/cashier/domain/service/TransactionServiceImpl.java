@@ -6,6 +6,7 @@ import com.nocountry.cashier.controller.dto.response.AccountResponseDTO;
 import com.nocountry.cashier.controller.dto.response.TransactionResponseDTO;
 import com.nocountry.cashier.domain.usecase.TransactionService;
 import com.nocountry.cashier.enums.EnumsState;
+import com.nocountry.cashier.enums.EnumsTransactions;
 import com.nocountry.cashier.exception.GenericException;
 import com.nocountry.cashier.exception.ResourceNotFoundException;
 import com.nocountry.cashier.persistance.entity.AccountEntity;
@@ -30,6 +31,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -65,29 +67,20 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionResponseDTO createTransaction(TransactionRequestDTO data, String data2) {
         TransactionEntity transaction = new TransactionEntity();
         Optional<AccountEntity> entity = accountRepository.findById(data2);
-        //AccountResponseDTO accountResponseDTO = accountService.getAccount(data2);
-//        System.out.println("+++++++++++++++++++++++++++++++++++++"+entity);
-//        transaction.setAccountEntity(entity);
-//        System.out.println("+++++++++++++++++++++++++++++++++++++"+transaction.toString());
 
         data.setOrigin(entity.get().getCvu().toString());
         data.setDestination((GeneratorCVU.generate("202",22)));
         data.setDateEmit(LocalDateTime.now().toString());
-
-        //data.setState("DONE");
-        //data.setType("PAYMENT_QR");
         if (entity.isPresent()) {
             transaction = Optional.of(data)
                     .map(mapper::toTransactionEntity)
                     .map(transactionRepository::save)
                     .orElseThrow(() -> new GenericException("Oops no pudismos resolver la transaccion", HttpStatus.BAD_REQUEST));
             transaction.setAccountEntity(entity.get());
-           // System.out.println("+++++++++++++++++++++++++++++++++++++" + transaction.toString());
             return mapper.toTransactionResponseDto(transaction);
         }else{
 
             transaction.setAccountEntity(entity.get());
-//            System.out.println("+++++++++++++++++++++++++++++++++++++" + transaction.toString());
             return mapper.toTransactionResponseDto(transaction);
         }
 
@@ -107,6 +100,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
 
+
+
     @Override
     @Transactional(readOnly = true)
     public Optional<TransactionResponseDTO> getById(String s) {
@@ -116,36 +111,88 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<TransactionEntity> findByState(EnumsState state,String idAccount) throws Exception{
+//        try {
+//            List<TransactionEntity> listEntity = transactionRepository.findByState(state,idAccount);
+//            return listEntity;
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+//    }
+
+//    @Override
+//    public Page<TransactionResponseDTO> findByState(PageableDto pageableDto, EnumsState state, String idAccount) throws Exception {
+//        Pageable pageable = utility.setPageable(pageableDto);
+//        List<TransactionEntity> transactions = transactionRepository.findByState(state,idAccount);
+//        Page<List<TransactionEntity>> transactionEntityPage= transactions.pagable();
+//        List<TransactionEntity> responseDtoList = transactions.getContent().Strem()
+//                .map(mapper::toTransactionResponseDto)
+//                .toList();
+//        return new PageImpl<>(responseDtoList);
+//    }
+@Override
+public Page<TransactionResponseDTO> findByState(EnumsState state, String idAccount,PageableDto pageableDto) throws Exception {
+
+
+    try{
+        Pageable pageable = utility.setPageable(pageableDto);
+        Page<TransactionEntity> transactionPage = transactionRepository.findByState(state, idAccount, pageable);
+
+        // Mapear la lista de entidades a DTOs
+        List<TransactionResponseDTO> responseDtoList = transactionPage.getContent().stream()
+                .map(mapper::toTransactionResponseDto)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(responseDtoList, pageable, transactionPage.getTotalElements());
+    }catch (Exception e){
+        throw new Exception(e.getMessage());
+    }
+}
     @Override
     @Transactional(readOnly = true)
-    public List<TransactionEntity> findByState(EnumsState state,String idAccount) throws Exception{
+    public Page<TransactionResponseDTO> findByType(EnumsTransactions type, String idAccount, PageableDto pageableDto) throws Exception{
         try {
-            List<TransactionEntity> listEntity = transactionRepository.findByState(state,idAccount);
-            return listEntity;
+            Pageable pageable = utility.setPageable(pageableDto);
+            Page<TransactionEntity> transactionPage = transactionRepository.findByType(type, idAccount, pageable);
+
+            // Mapear la lista de entidades a DTOs
+            List<TransactionResponseDTO> responseDtoList = transactionPage.getContent().stream()
+                    .map(mapper::toTransactionResponseDto)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(responseDtoList, pageable, transactionPage.getTotalElements());
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    } @Override
+    @Transactional(readOnly = true)
+    public Page<TransactionResponseDTO> findByAmount(BigDecimal amount, String idAccount, PageableDto pageableDto) throws Exception{
+        try {
+            Pageable pageable = utility.setPageable(pageableDto);
+            Page<TransactionEntity> transactionPage = transactionRepository.findByAmount(amount, idAccount, pageable);
+
+            // Mapear la lista de entidades a DTOs
+            List<TransactionResponseDTO> responseDtoList = transactionPage.getContent().stream()
+                    .map(mapper::toTransactionResponseDto)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(responseDtoList, pageable, transactionPage.getTotalElements());
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
-    @Override
-    @Transactional(readOnly = true)
-    public List<TransactionEntity> findByTypeIs(EnumsState type) throws Exception{
-        try {
-            List<TransactionEntity> listEntity = transactionRepository.findByType(type);
-            return listEntity;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-    @Override
-    @Transactional(readOnly = true)
-    public List<TransactionEntity> findByAmount(BigDecimal amount) throws Exception{
-        try {
-            List<TransactionEntity> listEntity = transactionRepository.findByType(amount);
-            return listEntity;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<TransactionEntity> findByAmount(BigDecimal amount) throws Exception{
+//        try {
+//            List<TransactionEntity> listEntity = transactionRepository.findByType(amount);
+//            return listEntity;
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+//    }
 
 //    @Transactional(readOnly = true)
 //    public Page<TransactionResponseDTO> getTransactionByType(PageableDto pageableDto,String type){
