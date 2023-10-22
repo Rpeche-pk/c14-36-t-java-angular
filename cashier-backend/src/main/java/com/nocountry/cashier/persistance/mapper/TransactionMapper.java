@@ -10,19 +10,21 @@ import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,uses ={
         EnumsTransactionMapper.class,
-        EnumsStateMapper.class
+        EnumsStateMapper.class,
+        AccountMapper.class
 })
 public interface TransactionMapper {
-    @Mappings({
-            @Mapping(target ="id" ,source ="id"),
-            @Mapping(target = "dateEmit",source = "dateEmit"),
-            @Mapping(target = "type",source = "type"),
-            @Mapping(target = "amount",source = "amount"),
-            @Mapping(target = "origin",source = "origin"),
-            @Mapping(target = "destination",source = "destination"),
-            @Mapping(target = "state",source = "state")
-
-    })
+//    @Mappings({
+//            @Mapping(target ="id" ,source ="id"),
+//            @Mapping(target = "dateEmit",source = "dateEmit"),
+//            @Mapping(target = "type",source = "type"),
+//            @Mapping(target = "amount",source = "amount"),
+//            @Mapping(target = "origin",source = "origin"),
+//            @Mapping(target = "destination",source = "destination"),
+//            @Mapping(target = "state",source = "state"),
+//            @Mapping(target = "AccounEntyti.id_account",source = "AccounEntyti.id_Account")
+//
+//    })
     TransactionEntity toTransactionEntity(TransactionRequestDTO transactionRequestDTO);
     @InheritInverseConfiguration
     TransactionResponseDTO toTransactionResponseDto(TransactionEntity transactionEntity);

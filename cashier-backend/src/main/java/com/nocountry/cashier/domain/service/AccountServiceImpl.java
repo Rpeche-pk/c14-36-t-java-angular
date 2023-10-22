@@ -3,6 +3,7 @@ package com.nocountry.cashier.domain.service;
 import com.nocountry.cashier.controller.dto.response.AccountResponseDTO;
 import com.nocountry.cashier.domain.usecase.AccountService;
 
+import com.nocountry.cashier.exception.DuplicateEntityException;
 import com.nocountry.cashier.persistance.entity.AccountEntity;
 import com.nocountry.cashier.persistance.entity.UserEntity;
 import com.nocountry.cashier.persistance.mapper.AccountMapper;
@@ -50,25 +51,23 @@ public class AccountServiceImpl implements AccountService {
 
         UserEntity userEntity = userRepository.findById(uuidUser).orElse(null);
 
+        if(userEntity.getAccountEntity() != null) {
+            throw new DuplicateEntityException("Error!! El usuario ya posee una Cuenta!!!");
+        }
+
         AccountEntity accountEntity = new AccountEntity();
 
         accountEntity.setTotalAccount(BigDecimal.ZERO);
         accountEntity.setOpenAccountDate(LocalDate.now());
         accountEntity.setCvu((GeneratorCVU.generate("452", 22)));
         accountEntity.setStatus(true);
+        accountEntity.setEnabled(true);
 
-        //lanzar excepcion
-       /*if(userEntity.getAccountEntity().getIdAccount() == null) {
-            //guardar
-        }
-        else{
+            userEntity.setAccountEntity(accountEntity);
 
-        }*/
-        userEntity.setAccountEntity(accountEntity);
+            userRepository.save(userEntity);
 
-        userRepository.save(userEntity);
-
-        return accountMapper.toGetAccountDTO(accountEntity);
+            return accountMapper.toGetAccountDTO(accountEntity);
     }
 
 

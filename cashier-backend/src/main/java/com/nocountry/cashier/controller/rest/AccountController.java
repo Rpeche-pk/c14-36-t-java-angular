@@ -2,60 +2,64 @@ package com.nocountry.cashier.controller.rest;
 
 import com.nocountry.cashier.controller.dto.response.AccountResponseDTO;
 import com.nocountry.cashier.domain.usecase.AccountService;
-import com.nocountry.cashier.exception.RegisterNotFound;
 
-import com.nocountry.cashier.persistance.entity.AccountEntity;
+import com.nocountry.cashier.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static io.opencensus.trace.Status.OK;
+
+import static com.nocountry.cashier.util.Constant.*;
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping(value = API_VERSION + RESOURCE_ACCOUNT)
 public class AccountController {
 
     private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+
     @Autowired
     private AccountService accountService;
 
     @GetMapping
-    public List<AccountResponseDTO> getAllAccount(){
+    public ResponseEntity<?> getAllAccount(){
 
-        List<AccountResponseDTO> accountList= accountService.getAllAccounts();
+        var accountList= accountService.getAllAccounts();
 
         accountList.forEach(application -> logger.info(accountList.toString()));
 
-        return accountList;
+        Map<String, Object> response = Map.of("message", "Accounts List", "data", accountList);
+
+        return new ResponseEntity<>(response, OK);
     }
 
     @GetMapping("/{idAccount}")
-    public ResponseEntity<AccountResponseDTO> getAccount(@PathVariable String idAccount){
+    public ResponseEntity<?> getAccount(@PathVariable String idAccount){
 
         AccountResponseDTO account = accountService.getAccount(idAccount);
 
         if(account == null){
-            throw new RegisterNotFound("Doesn´t Found account id: " +idAccount);
+            throw new ResourceNotFoundException("Doesn´t Found account id: " +idAccount);
         }
         return ResponseEntity.ok(account);
     }
 
     @PostMapping
-    public AccountResponseDTO createAccount(@RequestParam("uuidUser") String uuidUser){
+    public ResponseEntity<?> createAccount(@RequestParam("uuidUser") String uuidUser){
 
-        //var accountResponseDTO = accountService.createAccount(uuidUser);
+        AccountResponseDTO accountResponseDTO = accountService.createAccount(uuidUser);
 
-        //return new ResponseEntity<>(Map.of("exeq", accountResponseDTO), OK);
+        String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/")
+                .path("{id}").buildAndExpand(accountResponseDTO.getIdAccount()).toUriString();
 
-        return accountService.createAccount(uuidUser);
+        return ResponseEntity.status(CREATED).body(uri);
     }
 
     @DeleteMapping("/{idAccount}")
@@ -64,7 +68,7 @@ public class AccountController {
         AccountResponseDTO account = accountService.getAccount(idAccount);
 
         if(account == null){
-            throw new RegisterNotFound("ID not found " +idAccount);
+            throw new ResourceNotFoundException("ID not found " +idAccount);
         }
         accountService.deleteAccount(idAccount);
         //JSON{"delete" : true}
