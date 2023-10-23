@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './component/Pages/dashboard/dashboard.component';
@@ -17,7 +19,6 @@ import { LoginComponent } from './component/Pages/login/login.component';
 import { RegisterComponent } from './component/Pages/register/register.component';
 import { TransactionComponent } from './component/Pages/transaction/transaction.component';
 import { CreditCardComponent } from './component/Pages/credit-card/credit-card.component';
-import { MetricComponent } from './component/Pages/metric/metric.component';
 import { HelpResponseComponent } from './component/Pages/helpPages/help-response/help-response.component';
 import { HelpRequestComponent } from './component/Pages/helpPages/help-request/help-request.component';
 import { HelpComponent } from './component/Pages/helpPages/help/help.component';
@@ -27,6 +28,8 @@ import { InfoUserComponent } from './component/Pages/info-user/info-user.compone
 import { SideBarAltComponent } from './shared/side-bar-alt/side-bar-alt.component';
 import { UserDashboardComponent } from './component/Pages/user-dashboard/user-dashboard.component';
 import { CookieService } from 'ngx-cookie-service';
+import { NgChartsModule } from 'ng2-charts';
+import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 import { Found404Component } from './component/Pages/found404/found404.component';
 import { ServicePageComponent } from './component/Pages/service-page/service-page.component';
@@ -40,7 +43,6 @@ import { ServicePageComponent } from './component/Pages/service-page/service-pag
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
-    MetricComponent,
     CreditCardComponent,
     CreditCardChildComponent,
     FooterComponent,
@@ -53,6 +55,7 @@ import { ServicePageComponent } from './component/Pages/service-page/service-pag
     SideBarAltComponent,
     UserDashboardComponent,
     HelpQuestionResComponent,
+    MetricasComponent,
     PromotionsComponent,
     Found404Component,
     ServicePageComponent,
@@ -65,6 +68,9 @@ import { ServicePageComponent } from './component/Pages/service-page/service-pag
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgChartsModule,
+    
+    
   ],
   providers: [
     CookieService

@@ -16,38 +16,35 @@ import { authGuard } from './guards/auth.guard';
 import { loginGuard } from './guards/login.guard';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 import { Found404Component } from './component/Pages/found404/found404.component';
+import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
 import { ServicePageComponent } from './component/Pages/service-page/service-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
-  { path: 'user', component: UserDashboardComponent,
-  canActivate:[authGuard],
-  children: [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: DashboardComponent },
-    { path: 'credit-card', component: CreditCardComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'transfer', component:TransactionComponent},
-    { path : 'promo', component:PromotionsComponent},
-    { path: 'service', component:ServicePageComponent },
-    {path: 'help', component: HelpComponent,
+  { path: 'user', component: UserDashboardComponent, canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'helpReq', pathMatch: 'full' },
-      { path: 'helpReq', component: HelpRequestComponent },
-      { path: 'helpRes/:id', component: HelpResponseComponent },
-      { path: 'helpQuestionRes/:id', component: HelpQuestionResComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: DashboardComponent },
+      { path: 'credit-card', component: CreditCardComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'metricas', component: MetricasComponent },
+      { path: 'transfer', component: TransactionComponent },
+      { path: 'promo', component: PromotionsComponent },
+      { path: 'service', component: ServicePageComponent },
+      { path: 'help', component: HelpComponent,
+        children: [
+          { path: '', redirectTo: 'helpReq', pathMatch: 'full' },
+          { path: 'helpReq', component: HelpRequestComponent },
+          { path: 'helpRes/:id', component: HelpResponseComponent },
+          { path: 'helpQuestionRes/:id', component: HelpQuestionResComponent },
+        ],
+      },
+      { path: 'info-user', component: InfoUserComponent },
     ],
   },
-  { path: 'info-user', component:InfoUserComponent },
-],
-},
-{ path: 'login', component: LoginComponent,
-canActivate:[loginGuard]
-},
-{ path: 'register', component: RegisterComponent,
-canActivate:[loginGuard]
-},
-{ path:'**', component:Found404Component, pathMatch:'full'},
+  { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [loginGuard] },
+  { path: '**', component: Found404Component, pathMatch: 'full' },
 ];
 
 @NgModule({
