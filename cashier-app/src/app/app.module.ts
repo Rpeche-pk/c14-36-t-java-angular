@@ -32,6 +32,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { MetricasComponent } from './component/Pages/dashboard/metricas/metricas.component';
 import { PromotionsComponent } from './component/Pages/promotions/promotions.component';
 import { Found404Component } from './component/Pages/found404/found404.component';
+import { ServicePageComponent } from './component/Pages/service-page/service-page.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { Found404Component } from './component/Pages/found404/found404.component
     MetricasComponent,
     PromotionsComponent,
     Found404Component,
+    ServicePageComponent,
   ],
   imports: [
     BrowserModule,
