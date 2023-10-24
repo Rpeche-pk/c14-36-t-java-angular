@@ -13,5 +13,6 @@ public interface AccountMapper {
 
     AccountResponseDTO toGetAccountDTO(AccountEntity accountEntity);
 
+    AccountEntity toGetAccountEntity(AccountResponseDTO accountResponseDTO);
     List<AccountResponseDTO> toGetAccountDTOList(List<AccountEntity> accountEntityList);
 }

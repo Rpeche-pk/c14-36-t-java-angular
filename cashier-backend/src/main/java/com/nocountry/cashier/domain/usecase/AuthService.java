@@ -14,5 +14,5 @@ import java.util.Map;
  */
 public interface AuthService{
     AuthResponseDTO register(UserRequestDTO userRequestDTO);
-    AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO, String token);
+    AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO);
 }

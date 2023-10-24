@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,10 +25,11 @@ import java.util.List;
 
 
 @Entity
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
 @SQLDelete(sql = "UPDATE account_entity SET enabled=false where id=?")
-@Where(clause = "enabled=true")
+//@Where(clause = "enabled=true")
 public class AccountEntity extends Auditable<LocalDateTime> {
 
     @Id
@@ -42,12 +44,18 @@ public class AccountEntity extends Auditable<LocalDateTime> {
 
     private LocalDate updateAccountDate;
 
-    private BigDecimal TotalAccount;
+    private BigDecimal totalAccount;
 
     private boolean status;
 
+    private Boolean enabled;
+
+//    @OneToMany(mappedBy = "account_entity")
+//    private List<TransactionEntity> transaccionEntityList;
+
     @OneToMany(mappedBy = "accountEntity")
-    private List<TransactionEntity> transaccionEntityList;
+    private List<TransactionEntity> transactionEntityList;
+
 
 
 
