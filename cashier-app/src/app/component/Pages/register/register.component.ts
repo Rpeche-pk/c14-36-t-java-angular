@@ -1,63 +1,67 @@
-import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/User.interface';
-import { UserService } from 'src/app/services/user.service';
+import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+<<<<<<< HEAD
 export class RegisterComponent implements OnInit {
   created: boolean = false;
-  user!: FormGroup;
+  user!: FormGroup<User|any>;
+  users!: User[];
 
   constructor(
     private userService: UserService,
     private router: Router,
     private fb: FormBuilder
-  ) {
-    this.initForm();
-    console.log('user: ' + this.user);
-  }
+  ) {}
   ngOnInit(): void {
-    console.log(
-     'users: ' + this.userService.getUsers()    );
+    this.user = this.initForm();
+    this.getAllData();
   }
   toLogin() {
     this.router.navigate(['login']);
   }
 
-  onSubmit(): void {
-    const userData = this.user.value;
-    console.log('userData' + userData);
+  
 
-    this.userService.addNewUser(userData).subscribe((res) => {
-      console.log('Respuesta: ' + res);
-      this.created = true;
-    },
-      (err) => {
-        console.error('Error( ', err + ')');
+  onSubmit(): void {
+    const userData: User = this.user.value;
+    this.userService.addNewUser(userData).subscribe(
+      (response) => {
+        console.log(response);
+        this.created = true;
+      },
+      (error) => {
+        console.error('Error:', error);
       }
     );
   }
 
-
+  getAllData() {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+      console.log(this.users)
+    })
+  }
   initForm(): FormGroup {
-    return this.fb.group(
-      {
-        nombre: ['', [Validators.required, Validators.minLength(3)]],
-        apellido: ['', [Validators.required, Validators.minLength(3)]],
-        dni: ['', [Validators.required, Validators.maxLength(8)]],
-        telefono: ['', [Validators.required]],
-        email: ['', [Validators.email, Validators.required]],
-        fechaNac: ['', [Validators.required]],
-        direccion: ['', [Validators.min(5), Validators.required]],
-        password: ['', [Validators.required]],
-        password2: ['', Validators.required]
-      }
-    )
+    return this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      password2: ['', [Validators.required, Validators.minLength(8)]],
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.minLength(7)]],
+      address: ['', [Validators.required]],
+      birthDate: ['', [Validators.required, Validators.maxLength(4)]],
+      dni: ['', [Validators.required, Validators.maxLength(8)]]
+    });
   }
 }
+=======
+export class RegisterComponent {
+
+}
+>>>>>>> 5b3ae6751dfd707332e1e84cf7504619795df89e
