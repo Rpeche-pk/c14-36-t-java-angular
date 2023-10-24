@@ -35,4 +35,8 @@ public final class ResourceNotFoundException extends RuntimeException {
         super(String.valueOf(fieldValue));
         this.fieldValue = fieldValue;
     }
+
+    public ResourceNotFoundException(String message){
+        super(message);
+    }
 }

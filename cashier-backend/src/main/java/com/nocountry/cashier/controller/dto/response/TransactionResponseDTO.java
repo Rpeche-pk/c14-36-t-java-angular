@@ -2,6 +2,7 @@ package com.nocountry.cashier.controller.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.nocountry.cashier.persistance.entity.AccountEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,9 +17,13 @@ public record TransactionResponseDTO(
         String type,
 
         Long amount,
-        Long origin,
-        Long destination,
+        String origin,
+        String destination,
         String state
+
+
+
+
         ) implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

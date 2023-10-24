@@ -10,10 +10,9 @@ public interface AccountService {
 
     List<AccountResponseDTO> getAllAccounts();
 
-    AccountEntity getAccount(String idAccount);
-
-    //AccountEntity createAccount(AccountEntity accountEntity);
+    AccountResponseDTO getAccount(String idAccount);
 
     AccountResponseDTO createAccount(String uuidUser);
-    void deleteAccount(AccountEntity accountEntity);
+
+    void deleteAccount(String uuidAccount);
 }

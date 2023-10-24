@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -18,7 +19,7 @@ public class AccountResponseDTO {
 
     private LocalDate openAccountDate;
 
-    private Double TotalAccount;
+    private BigDecimal totalAccount;
 
     private boolean status;
 }
