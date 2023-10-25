@@ -1,4 +1,5 @@
 @import "../../../stylesConfig/config";
+
 :host {
   display: flex;
   flex-direction: column;
@@ -6,7 +7,6 @@
 }
 
 .loginBox {
-  background-color: yellow;
   flex-grow: 2;
   &__left {
     display: grid;
@@ -17,7 +17,6 @@
       &__form {
         margin-bottom: 1rem;
         &__field {
-          border-bottom: solid 2px changeOpacity($colWhite, 0.7);
           margin-bottom: 1rem;
           display: flex;
           flex-direction: column;
@@ -25,6 +24,7 @@
             color: $colGreenLight;
           }
           &__box {
+            border-bottom: solid 2px changeOpacity($colWhite, 0.7);
             display: flex;
             justify-content: space-between;
             padding-bottom: 0.5rem;
@@ -35,15 +35,30 @@
               width: 2rem;
               @include changeColorPng(gray);
             }
+            .fieldInvalid {
+              @include changeColorPng(red);
+            }
             input {
               flex-grow: 2;
               background-color: inherit;
               border: none;
               outline: none;
               color: $colWhite;
-              &:focus + img{
+              &:focus + img {
                 @include changeColorPng($colGreenLight);
-
+              }
+              /* ----------------------------estilo del icono del calendario */
+              &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                cursor: pointer;
+              }
+              /*-------------------------borrando estilos del autocompletado */
+              &:-webkit-autofill,
+              &:-webkit-autofill:hover,
+              &:-webkit-autofill:focus,
+              &:-webkit-autofill:active {
+                -webkit-box-shadow: 0 0 0 30px $colBlack inset !important; /* Ajusta el color de fondo según tus necesidades */
+                -webkit-text-fill-color: $colWhite !important;
               }
             }
             button {
@@ -53,6 +68,13 @@
                 @include changeColorPng($colGreenLight);
               }
             }
+          }
+          &__message {
+            height: 1rem;
+            color: red;
+          }
+          .error {
+            border-bottom: solid 2px changeOpacity(red, 0.7);
           }
         }
         &__actions {
@@ -64,13 +86,20 @@
           }
           .btnRegist {
             @include btnStyle("empty", $colGreenLight);
+            &:disabled {
+              cursor: auto;
+              color: changeOpacity($colGreenLight, 0.1);
+              &:hover {
+                transform: none;
+              }
+            }
           }
         }
       }
-      &__terms>a{
+      &__terms > a {
         text-decoration: none;
-        color:$colGreenLight;
-        &:hover{
+        color: $colGreenLight;
+        &:hover {
           text-decoration: underline;
         }
       }
@@ -85,11 +114,16 @@
   }
 }
 /* --------------------------------------------------------- */
-@media screen and (max-width:768px){
-  .loginBox__right{
+@media screen and (max-width: 768px) {
+  .loginBox__right {
     display: none;
   }
-  .loginBox__left{
+  .loginBox__left {
     width: 100% !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .loginBox__left {
+    padding-inline: 0.5rem;
   }
 }
