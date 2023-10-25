@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailValidator } from 'src/app/CustomValidator/customValidator';
+import { enterLateral } from 'src/app/animations/animation';
 import { User } from 'src/app/interfaces/User.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,10 +10,13 @@ import { UserService } from 'src/app/services/user.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  animations:[enterLateral]
 })
 export class LoginComponent implements OnInit {
   user!: FormGroup<User | any>;
   eyeStatus = false;
+  message!:string;
+  isShowMessage = false;
 
   constructor(
     private userService: UserService,
@@ -25,20 +29,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.isShowMessage = true;
+    setTimeout(()=>(this.isShowMessage = false), 5000);
     const userData: User = this.user.value;
-    this.userService.loginUser(userData).subscribe(
-      (response) => {
-        if (response.message == 'Authenticación correcta') {
-          localStorage.setItem("token", response.token)
-          this.router.navigate(['/user']);
+    this.userService.loginUser(userData).subscribe({
+      next:(res)=>{
+        if(res.data.id){
+          localStorage.setItem('token',res.data.token)
+          this.router.navigate(['user']);
+          return;
         }
-        console.log(response);
-
+        this.message = res.data.message;
       },
-      (error) => {
-        console.error(error);
-      }
-    );
+      error:(err)=>(this.message = err.error.detail),
+      complete:()=>(console.log("Peticion de login finalizada"))
+    });
   }
 
   toRegist() {

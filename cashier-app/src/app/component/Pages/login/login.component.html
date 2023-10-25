@@ -77,6 +77,11 @@
           </button>
         </div>
       </form>
+      <div class="loginBox__left__container__message">
+        <p *ngIf="isShowMessage" [@lateralEffect]>
+          <span class="text-danger">{{message || 'esperando...'}}</span>
+        </p>
+      </div>
       <!---------------------- terminos y condiciones ----------------------->
       <div class="loginBox__left__container__terms d-flex justify-content-end">
         <a class="ms-2" href="#">Privacidad</a>

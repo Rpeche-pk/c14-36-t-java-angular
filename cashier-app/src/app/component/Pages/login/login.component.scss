@@ -15,7 +15,6 @@
     &__container {
       width: min(300px, 100%);
       &__form {
-        margin-bottom: 1rem;
         &__field {
           margin-bottom: 1rem;
           display: flex;
@@ -98,6 +97,10 @@
             @include btnStyle("empty", $colGreenLight);
           }
         }
+      }
+      &__message{
+        text-align: center;
+        height: 1.5rem;
       }
       &__terms>a{
         text-decoration: none;

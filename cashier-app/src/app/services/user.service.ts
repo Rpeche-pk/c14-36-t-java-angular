@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/User.interface';
+import { ILoginRes, IRegistRes } from '../interfaces/response.interface';
 
 
 @Injectable({
@@ -16,8 +17,8 @@ export class UserService {
 
   constructor() {}
 
-  addNewUser(user: User): Observable<User> {
-    return this.http.post<User>(this.APIRegister, user);
+  addNewUser(user: User) {
+    return this.http.post<IRegistRes>(this.APIRegister, user);
   }
 
   getUsers(): Observable<User[]> {
@@ -42,6 +43,6 @@ export class UserService {
       password: user.password,
     };
 
-    return this.http.post<any>(this.API, body);
+    return this.http.post<ILoginRes>(this.APIRegister+"prueba", body);
   }
 }
