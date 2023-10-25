@@ -191,8 +191,8 @@
         </div>
 
         <div class="loginBox__left__container__form__actions">
-          <button (click)="toLogin()" type="submit" class="btnLogin">Iniciar Sesión</button>
           <button type="submit" [disabled]="!user.valid" class="btnRegist">Registrarse</button>
+          <button (click)="toLogin()" type="submit" class="btnLogin">Iniciar Sesión</button>
         </div>
       </form>
       <!---------------------- terminos y condiciones ----------------------->
