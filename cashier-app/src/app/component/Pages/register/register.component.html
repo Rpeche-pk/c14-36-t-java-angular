@@ -149,7 +149,6 @@
           <label for="password">Contraseña </label>
           <div class="loginBox__left__container__form__field__box"
           [ngClass]="(user.get('password')?.errors && user.get('password')?.touched) ? 'error':''">
-          >
             <input
             [type]="eyeStatus? 'text':'password'"
             formControlName="password"
@@ -158,7 +157,7 @@
             (input)="validateField('password')"/>
             <img src="assets/llave.png" alt="key_icon"
             [ngClass]="(user.get('password')?.errors && user.get('password')?.touched) ? 'fieldInvalid':''"/>
-            <button (click)="eyeStatus = !eyeStatus">
+            <button type="button" (click)="eyeStatus = !eyeStatus">
               <img class="eye" [src]="eyeStatus ? 'assets/eyeOpen.png' : 'assets/eyeClose.png'" alt="eye_icon" />
             </button>
           </div>
@@ -181,7 +180,7 @@
             (input)="validateField('password2')"/>
             <img src="assets/llave.png" alt="key_icon"
             [ngClass]="(user.get('password2')?.errors && user.get('password2')?.touched) ? 'fieldInvalid':''"/>
-            <button (click)="eyeStatus2 = !eyeStatus2">
+            <button type="button" (click)="eyeStatus2 = !eyeStatus2">
               <img class="eye" [src]="eyeStatus2? 'assets/eyeOpen.png' : 'assets/eyeClose.png'" alt="eye_icon" />
             </button>
           </div>

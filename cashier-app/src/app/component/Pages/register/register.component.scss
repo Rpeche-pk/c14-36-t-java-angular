@@ -59,6 +59,7 @@
               &:-webkit-autofill:active {
                 -webkit-box-shadow: 0 0 0 30px $colBlack inset !important; /* Ajusta el color de fondo según tus necesidades */
                 -webkit-text-fill-color: $colWhite !important;
+                caret-color: $colWhite;
               }
             }
             button {
