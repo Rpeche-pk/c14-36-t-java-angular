@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { emailValidator } from 'src/app/CustomValidator/customValidator';
 import { User } from 'src/app/interfaces/User.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -46,8 +47,11 @@ export class LoginComponent implements OnInit {
 
   initForm(): FormGroup {
     return this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, emailValidator]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
+  }
+  validateField(fieldName: string) {
+    this.user.get(fieldName)?.updateValueAndValidity();
   }
 }
