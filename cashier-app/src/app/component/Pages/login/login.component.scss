@@ -17,7 +17,6 @@
       &__form {
         margin-bottom: 1rem;
         &__field {
-          border-bottom: solid 2px changeOpacity($colWhite, 0.7);
           margin-bottom: 1rem;
           display: flex;
           flex-direction: column;
@@ -25,6 +24,7 @@
             color: $colGreenLight;
           }
           &__box {
+            border-bottom: solid 2px changeOpacity($colWhite, 0.7);
             display: flex;
             justify-content: space-between;
             padding-bottom: 0.5rem;
@@ -34,6 +34,9 @@
               margin-right: 1rem;
               width: 2rem;
               @include changeColorPng(gray);
+            }
+            .fieldInvalid {
+              @include changeColorPng(red);
             }
             input {
               flex-grow: 2;
@@ -45,6 +48,20 @@
                 @include changeColorPng($colGreenLight);
 
               }
+              /* ----------------------------estilo del icono del calendario */
+              &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                cursor: pointer;
+              }
+              /*-------------------------borrando estilos del autocompletado */
+              &:-webkit-autofill,
+              &:-webkit-autofill:hover,
+              &:-webkit-autofill:focus,
+              &:-webkit-autofill:active {
+                -webkit-box-shadow: 0 0 0 30px $colBlack inset !important; /* Ajusta el color de fondo según tus necesidades */
+                -webkit-text-fill-color: $colWhite !important;
+                caret-color: $colWhite ;
+              }
             }
             button {
               all: initial;
@@ -52,7 +69,15 @@
               img {
                 @include changeColorPng($colGreenLight);
               }
+
             }
+          }
+          &__message {
+            height: 1rem;
+            color: red;
+          }
+          .error {
+            border-bottom: solid 2px changeOpacity(red, 0.7);
           }
         }
         &__actions {
@@ -61,6 +86,13 @@
           align-items: center;
           .btnLogin {
             @include btnStyle("fill", $colGreenLight);
+            &:disabled {
+              opacity: 0.5;
+              cursor: auto;
+              &:hover {
+                transform: none;
+              }
+            }
           }
           .btnRegist {
             @include btnStyle("empty", $colGreenLight);
