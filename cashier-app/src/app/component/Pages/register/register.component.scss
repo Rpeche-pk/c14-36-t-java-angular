@@ -15,7 +15,6 @@
     &__container {
       width: min(500px, 100%);
       &__form {
-        margin-bottom: 1rem;
         &__field {
           margin-bottom: 1rem;
           display: flex;
@@ -95,6 +94,16 @@
               }
             }
           }
+        }
+      }
+      &__message{
+        text-align: center;
+        height: 1.5rem;
+        .success{
+          color: $colGreenLight;
+        }
+        .failed{
+          color: red;
         }
       }
       &__terms > a {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
@@ -18,18 +17,24 @@ import {
   repeatPassValidator,
   textValidator,
 } from 'src/app/CustomValidator/customValidator';
+import { enterLateral } from 'src/app/animations/animation';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  animations:[enterLateral]
 })
 export class RegisterComponent implements OnInit {
   eyeStatus = false;
   eyeStatus2 = false;
 
   repeatPass = false;
-  created: boolean = false;
+  message!:string;
+  isShowMessage = false;
+  messageStatus = false;
+
+  created = false;
   user!: FormGroup<User | any>;
   // users!: User[];
 
@@ -47,21 +52,21 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const userData: any = this.user.value;
-    this.userService.addNewUser(userData).subscribe(
-      (response: any) => {
-        const message: string = response.data.message;
-        if (message == 'Se registró correctamente') {
-          this.router.navigate(['/login']);
-        }
-        console.log(message);
-
-        this.created = true;
+    this.isShowMessage = true;
+    setTimeout(()=>(this.isShowMessage = false),5000)
+    const userData = this.user.value;
+    this.userService.addNewUser(userData).subscribe({
+      next:()=>{
+        this.messageStatus = true;
+        this.message = 'Registro exitoso, verifique la cuenta desde el correo';
+        setTimeout(()=>(this.router.navigate(['login'])),3000)
       },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
+      error:(err)=>{
+        this.messageStatus = false;
+        this.message = err.error.detail
+      },
+      complete:()=>(console.log("peticion realizada desde el register"))
+    });
   }
 
   // getAllData() {

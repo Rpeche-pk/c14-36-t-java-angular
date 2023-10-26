@@ -29,7 +29,6 @@
           </div>
         </div>
 
-
         <div class="loginBox__left__container__form__field">
           <label for="lastName">Apellido </label>
           <div class="loginBox__left__container__form__field__box"
@@ -194,6 +193,11 @@
           <button (click)="toLogin()" type="submit" class="btnLogin">Iniciar Sesión</button>
         </div>
       </form>
+      <div class="loginBox__left__container__message">
+        <p [@lateralEffect] *ngIf="isShowMessage">
+          <span [ngClass]="messageStatus?'success':'failed'">{{message || "esperando..."}}</span>
+        </p>
+      </div>
       <!---------------------- terminos y condiciones ----------------------->
       <div class="loginBox__left__container__terms d-flex justify-content-end">
         <a class="ms-2" href="#">Privacidad</a>
