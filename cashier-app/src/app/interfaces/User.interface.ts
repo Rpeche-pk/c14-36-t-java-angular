@@ -22,3 +22,13 @@ export interface User {
     address: string;
     birthDate: Date;
 }
+
+export interface IUserProfile extends Omit<User, 'password'| 'birthDate'> {
+  image: string;
+  address: string;
+  idAccount: string;
+  idCard: string;
+  birthDate: string;
+  openAccountDate: string;
+  createdDate: string;
+}
