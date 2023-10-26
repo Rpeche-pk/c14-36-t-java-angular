@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserData } from 'src/app/interfaces/userData.inteface';
-import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +8,17 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+  @Input() userData!:UserData;
   constructor(private route: Router) { }
 
   ngOnInit(): void {
 
   }
-
+  pipeNameData(name:string){
+    const names = name.split(" ");
+    const [firstName, lastname] = names;
+    return (firstName.charAt(0)+lastname.charAt(0)).toUpperCase();
+  }
   logOutUser() {
     /* logica del servicio */
     localStorage.clear();
