@@ -3,35 +3,45 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/User.interface';
+import { IGetUserRes, ILoginRes, IRegistRes } from '../interfaces/response.interface';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private readonly API = environment.api;
-  private readonly API2 = environment.api2;
+  private readonly API = environment.apiLogin;
+  private readonly APIGETUSER = environment.apiGetUser;
+  private readonly APIRegister = environment.apiRegister;
   private readonly http = inject(HttpClient);
 
-  constructor() { }
+  constructor() {}
 
-  addNewUser(user: User): Observable<User> {
-    return this.http.post<User>(this.API, user)
+  addNewUser(user: User) {
+    return this.http.post<IRegistRes>(this.APIRegister, user);
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.API2);
-  }
+  // getUsers() {
+    // return this.http.get<User[]>(this.APIGETUSER+idUser);
+  // }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.API}/${id}`);
+  getUser(userId: string) {
+    return this.http.get<IGetUserRes>(this.APIGETUSER+userId);
   }
-
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.API}/${user.id}`, user)
+    return this.http.put<User>(`${this.API}/${user.id}`, user);
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`)
+    return this.http.delete<void>(`${this.API}/${id}`);
+  }
+
+  loginUser(user: User) {
+    const body = {
+      email: user.email,
+      password: user.password,
+    };
+
+    return this.http.post<ILoginRes>(this.APIRegister+"auth", body);
   }
 }
