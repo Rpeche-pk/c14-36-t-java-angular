@@ -25,15 +25,14 @@ Todo esto logra que los usuarios de cashier puedan usarlo en cualquier dispositi
 
 ## Despliegue 📦
 
-__https://cashier-app-23.netlify.app/login :tw-1f4a3:
+__https://cashier-app-23.netlify.app/login 
 
-__https://181.15.143.132:9698/:tw-1f4af :tw-1f4af:
+__https://181.15.143.132:9698/:tw-1f4af 
 
-## Repo :tw-2705:
-
+## Repo 
 https://github.com/No-Country/c14-36-t-java-angular.git
 
-## Evolución :tw-26a1:
+## Evolución 
 
 En la V.2 de cashier (o en el próximo update de cashier) implementará mejoras de seguridad con datos biométricos, pago QR, pagos sin contacto (NFC), añadirá inversiones para aquellos que quieran invertir en la bolsa adquiriendo las acciones más atractivas del mercado o en las criptos.
 
