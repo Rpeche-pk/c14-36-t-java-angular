@@ -4,8 +4,11 @@
 Las ventajas de Nuestra Billetera Digital son:
 
 ✅**Intuitiva:** facilita al usuario la interactividad de la aplicación, logrando realizar pagos y transferencias de manera segura y confiable.
+
 ✅**Controles de Seguridad**: cifrado de alto nivel para proteger tus datos y transacciones. Tu dinero está en las mejores manos.
+
 ✅**Recompensas de Lealtad:** cashier valora tu lealtad ofreciéndote descuentos exclusivos en los mejores negocios.
+
 ✅**Tecnología de Vanguardia:** Cashier está desarrollada con los mas robustos lenguajes de programación y bajo principios SOLID es facilmente mantenible y escalable.
 
 Todo esto logra que los usuarios de cashier puedan usarlo en cualquier dispositivo y plataforma.
