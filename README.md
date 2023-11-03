@@ -25,12 +25,15 @@ Todo esto logra que los usuarios de cashier puedan usarlo en cualquier dispositi
 
 ## Despliegue 📦
 
-__https://cashier-app-23.netlify.app/login 
+__https://cashier-app-23.netlify.app/login (FRONTEND)
 
-__https://181.15.143.132:9698/:tw-1f4af 
+__servidor fisico IBM X3550 M4 (API)
 
 ## Repo 
 https://github.com/No-Country/c14-36-t-java-angular.git
+
+## Repo 
+https://youtu.be/HhMpTuKcwdA
 
 ## Evolución 
 
