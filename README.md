@@ -32,15 +32,16 @@ Todo esto logra que los usuarios de cashier puedan usarlo en cualquier dispositi
 
 ## Despliegue 📦
 
-__https://cashier-app-23.netlify.app/login (FRONTEND)
+![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7) https://cashier-app-23.netlify.app/login (FRONTEND)
 
-__servidor fisico IBM X3550 M4 (API)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white) servidor fisico IBM X3550 M4 (API)
 
 ## Repo 
-https://github.com/No-Country/c14-36-t-java-angular.git
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) https://github.com/No-Country/c14-36-t-java-angular.git
 
 ## Video Promo 
-https://youtu.be/HhMpTuKcwdA
+![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white) https://youtu.be/HhMpTuKcwdA
+
 [![Banner.png](https://i.postimg.cc/sXrp8dDs/Banner.png)](https://postimg.cc/WD5FFykH)
 
 ## Evolución 
