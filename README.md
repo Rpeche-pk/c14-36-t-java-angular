@@ -1,7 +1,6 @@
 # <img src="cashier-app/src/assets/cashier1.png">
 
 💫 Cashier v1 es una billetera digital pensada para ser tu Pasaporte al Mundo Financiero Moderno
-
 Las ventajas de Nuestra Billetera Digital son:
 
 ✅**Intuitiva:** facilita al usuario la interactividad de la aplicación, logrando realizar pagos y transferencias de manera segura y confiable.
@@ -34,6 +33,7 @@ https://github.com/No-Country/c14-36-t-java-angular.git
 
 ## Video Promo 
 https://youtu.be/HhMpTuKcwdA
+[![Banner.png](https://i.postimg.cc/sXrp8dDs/Banner.png)](https://postimg.cc/WD5FFykH)
 
 ## Evolución 
 
