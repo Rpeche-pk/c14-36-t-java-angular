@@ -2,6 +2,7 @@ package com.nocountry.cashier.controller.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nocountry.cashier.persistance.entity.UserEntity;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -18,7 +19,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Setter
 @Builder
-public class UserRequestDTO implements Serializable {
+public class
+UserRequestDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -34,14 +36,14 @@ public class UserRequestDTO implements Serializable {
 
     @NotEmpty(message = "es requerido.")
     @NotBlank(message = "no debe consistir solo en espacios en blanco")
-    @Pattern(regexp = "^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", message = "Debe ser un correo tipo gmail.")
+    //@Pattern(regexp = "^[a-z0-9ñÑ]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-_]{0,1}[a-z0-9Ññ])*@gmail\\.com$", message = "Debe ser un correo tipo gmail.")
+    @Email(message = "Debe ser un correo electronico.")
     private String email;
 
     @NotEmpty(message = "Debe ingresar un número de dni")
     private String dni;
 
     @Pattern(regexp = "^[0-9]{6,12}$", message = "El número de celular debe tener hasta 12 dígitos")
-
     @NotEmpty(message = "Debe ingresar un número de celular")
     private String phone;
 
