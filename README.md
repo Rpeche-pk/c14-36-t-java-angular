@@ -1,6 +1,6 @@
 # c14-36-t-java-angular
 Proyecto Cashier! A digital wallet application designed to simplify financial transactions and enhance user convenience. Our digital wallet platform provides users with the ability to securely store, manage, and transact their.
-# https://github.com/No-Country/c14-36-t-java-angular.git/cashier-app/src/assets/cashier1.png CASHIER!!!:
+# /cashier-app/src/assets/cashier1.png CASHIER!!!:
 
 💫 Cashier v1 es una billetera digital pensada para ser tu Pasaporte al Mundo Financiero Moderno
 
