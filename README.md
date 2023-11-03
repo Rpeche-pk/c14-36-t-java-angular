@@ -32,7 +32,7 @@ __servidor fisico IBM X3550 M4 (API)
 ## Repo 
 https://github.com/No-Country/c14-36-t-java-angular.git
 
-## Repo 
+## Video Promo 
 https://youtu.be/HhMpTuKcwdA
 
 ## Evolución 
